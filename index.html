@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nova Frame - Security Command Center</title>
-    <link rel="icon" href="https://cdn.discordapp.com/attachments/1428592257581318255/1438236995615981668/NovaFrame.png?ex=69162614&is=6914d494&hm=921a5972a46f28f3a69af87b05b159c5ada08ea799fb314084add32256e57584&" type="image/png">
     <style>
         * {
             margin: 0;
@@ -574,7 +573,7 @@
             <div class="page-content active" id="dashboard">
                 <div class="hero-card">
                     <h2>Central Security Framework</h2>
-                    <p>Real-time monitoring and protection for the entire Kurrasch Systems & Game Killers Studio ecosystem</p>
+                    <p>Real-time monitoring and protection for the entire Kurrasch Systems ecosystem</p>
                     <button class="btn-primary" onclick="navigateTo('partner')">⚡ Apply for Partnership - $50</button>
                 </div>
 
@@ -623,7 +622,7 @@
             <div class="page-content" id="facts">
                 <div class="content-section">
                     <h2>About Nova Frame</h2>
-                    <p>Nova Frame is a pure Node.js Discord bot framework serving as the central security, storage, and server-building backbone for the Kurrasch Systems & Game Killers Studio ecosystem.</p>
+                    <p>Nova Frame is a pure Node.js Discord bot framework serving as the central security, storage, and server-building backbone for the Kurrasch Systems ecosystem.</p>
                     
                     <h3>Core Capabilities</h3>
                     <ul>
@@ -723,7 +722,7 @@
                     <h2>Terms of Service</h2>
                     
                     <h3>1. Service Description</h3>
-                    <p>Nova Frame provides security, storage, and API services to approved partner bots within the Kurrasch Systems & Game Killers Studio ecosystem.</p>
+                    <p>Nova Frame provides security, storage, and API services to approved partner bots within the Kurrasch Systems ecosystem.</p>
 
                     <h3>2. Partnership Program</h3>
                     <ul>
@@ -739,7 +738,7 @@
                         <h4>✅ Included Services</h4>
                         <p><strong>Partners receive instructions and API access ONLY - no source code.</strong></p>
                         <ul>
-                            <li>Authentication API access</li>
+                            <li>Authentication token for API access</li>
                             <li>Documentation on API endpoints</li>
                             <li>Setup instructions for bot connection</li>
                             <li>Storage allocation and backup services</li>
@@ -760,8 +759,8 @@
 
                     <h3>4. Access Restrictions</h3>
                     <ul>
-                        <li>Nova Frame can only be invited by the owner (Kurrasch Systems Or Gmae Killers Studio)</li>
-                        <li>Partner may Invite Nova Fame To other servers approval Need First</li>
+                        <li>Nova Frame can only be invited by the owner (Kurrasch Systems)</li>
+                        <li>Partner bots may join other servers as approved</li>
                         <li>All API access requires valid authentication</li>
                         <li>Rate limits: 100 requests per minute per bot</li>
                     </ul>
@@ -942,7 +941,7 @@
         // Fetch REAL data from Nova Frame API
         async function fetchLiveData() {
             try {
-                const response = await fetch('http://193.31.31.105:25723/api/feed');
+                const response = await fetch('http://localhost:25723/api/feed');
                 
                 if (response.ok) {
                     const data = await response.json();
@@ -1007,7 +1006,7 @@
         // Stats polling for real-time updates
         async function pollStats() {
             try {
-                const response = await fetch('http://193.31.31.105:25723/api/status');
+                const response = await fetch('http://localhost:25723/api/status');
                 if (response.ok) {
                     const data = await response.json();
                     if (data.connectedBots !== undefined) {
@@ -1042,7 +1041,7 @@
             };
             
             try {
-                const response = await fetch('http://193.31.31.105:25723/api/partner/apply', {
+                const response = await fetch('http://localhost:25723/api/partner/apply', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -1067,7 +1066,7 @@
         // Initialize
         console.log('%c Nova Frame Security Hub ', 'background: linear-gradient(135deg, #667eea, #764ba2); color: white; font-size: 16px; padding: 10px;');
         console.log('🔒 Real-time security monitoring active');
-        console.log('📡 API Endpoint: http://193.31.31.105:25723');
+        console.log('📡 API Endpoint: http://localhost:25723');
         console.log('💳 Partnership: $50 one-time fee');
         console.log('📧 Contact: kurraschgamingmerchstore@gmail.com');
     </script>
