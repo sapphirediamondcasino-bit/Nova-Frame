@@ -941,7 +941,7 @@
         // Fetch REAL data from Nova Frame API
         async function fetchLiveData() {
             try {
-                const response = await fetch('http://localhost:25723/api/feed');
+                const response = await fetch('https://novaframe.site/proxy.php?path=/api/feed');
                 
                 if (response.ok) {
                     const data = await response.json();
@@ -1006,7 +1006,7 @@
         // Stats polling for real-time updates
         async function pollStats() {
             try {
-                const response = await fetch('http://localhost:25723/api/status');
+                const response = await fetch('https://novaframe.site/proxy.php?path=/api/status');
                 if (response.ok) {
                     const data = await response.json();
                     if (data.connectedBots !== undefined) {
@@ -1041,7 +1041,7 @@
             };
             
             try {
-                const response = await fetch('http://localhost:25723/api/partner/apply', {
+                const response = await fetch('https://novaframe.site/proxy.php?path=/api/partner/apply', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -1066,7 +1066,7 @@
         // Initialize
         console.log('%c Nova Frame Security Hub ', 'background: linear-gradient(135deg, #667eea, #764ba2); color: white; font-size: 16px; padding: 10px;');
         console.log('🔒 Real-time security monitoring active');
-        console.log('📡 API Endpoint: http://localhost:25723');
+        console.log('📡 API Endpoint: https://novaframe.site/proxy.php');
         console.log('💳 Partnership: $50 one-time fee');
         console.log('📧 Contact: kurraschgamingmerchstore@gmail.com');
     </script>
