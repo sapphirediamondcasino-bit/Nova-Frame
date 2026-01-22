@@ -887,6 +887,7 @@
         // API Configuration
         const API_URL = 'http://69.164.251.89:25724';
         const NEXUS_SERVER_ID = '1430022675765395509';
+        
         // Navigation
         function navigateTo(pageId) {
             document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
@@ -944,7 +945,7 @@
         // Fetch REAL data from Nova Frame API
         async function fetchLiveData() {
             try {
-                const response = await fetch(CORS_PROXY + encodeURIComponent(API_BASE + '/api/feed'))
+                const response = await fetch(API_URL + '/api/feed');
                 
                 if (response.ok) {
                     const data = await response.json();
@@ -952,12 +953,12 @@
                     // Clear system init message on first successful connection
                     if (fdrFeed.children.length === 1) {
                         fdrFeed.innerHTML = '';
-                        addFDRLine('SYSTEM', 'Connected to Nova Frame API - Port 25723');
+                        addFDRLine('SYSTEM', 'Connected to Nova Frame API - Port 25724');
                     }
                     
                     // Process feed data
-                    if (data.logs && Array.isArray(data.logs)) {
-                        data.logs.forEach(log => {
+                    if (data.recentActivity && Array.isArray(data.recentActivity)) {
+                        data.recentActivity.forEach(log => {
                             const logKey = log.timestamp + log.message;
                             if (!logBuffer.includes(logKey)) {
                                 addFDRLine(log.type, log.message);
@@ -969,17 +970,18 @@
                     
                     // Update stats
                     if (data.stats) {
-                        if (data.stats.connectedBots !== undefined) {
-                            document.getElementById('connected-bots').textContent = data.stats.connectedBots;
+                        if (data.stats.totalUsers !== undefined) {
+                            document.getElementById('connected-bots').textContent = data.stats.totalUsers;
                         }
-                        if (data.stats.threatsBlocked !== undefined) {
-                            document.getElementById('threats-blocked').textContent = data.stats.threatsBlocked;
+                        if (data.stats.failedRequests !== undefined) {
+                            document.getElementById('threats-blocked').textContent = data.stats.failedRequests;
                         }
                         if (data.stats.apiRequests !== undefined) {
                             document.getElementById('api-requests').textContent = data.stats.apiRequests;
                         }
                         if (data.stats.uptime !== undefined) {
-                            document.getElementById('uptime').textContent = data.stats.uptime + '%';
+                            const uptimeHours = Math.floor(data.stats.uptime / 3600);
+                            document.getElementById('uptime').textContent = uptimeHours + 'h';
                         }
                     }
                     
@@ -993,10 +995,11 @@
                 if (fdrFeed.children.length === 1) {
                     fdrFeed.innerHTML = '';
                     addFDRLine('SYSTEM', 'Nova Frame API offline - Waiting for connection...');
-                    addFDRLine('SYSTEM', 'Start Nova Frame on port 25723 to see live data');
+                    addFDRLine('SYSTEM', 'Start Nova Frame on port 25724 to see live data');
                 }
                 document.getElementById('system-status').textContent = 'OFFLINE';
                 document.querySelector('.status-dot').style.background = '#ff5f56';
+                console.error('API connection error:', error);
             }
         }
 
@@ -1009,14 +1012,14 @@
         // Stats polling for real-time updates
         async function pollStats() {
             try {
-                const response = await fetch(CORS_PROXY + encodeURIComponent(API_BASE + '/api/status'))
+                const response = await fetch(API_URL + '/api/status');
                 if (response.ok) {
                     const data = await response.json();
-                    if (data.connectedBots !== undefined) {
-                        document.getElementById('connected-bots').textContent = data.connectedBots;
+                    if (data.totalUsers !== undefined) {
+                        document.getElementById('connected-bots').textContent = data.totalUsers;
                     }
-                    if (data.threatsBlocked !== undefined) {
-                        document.getElementById('threats-blocked').textContent = data.threatsBlocked;
+                    if (data.failedRequests !== undefined) {
+                        document.getElementById('threats-blocked').textContent = data.failedRequests;
                     }
                     if (data.apiRequests !== undefined) {
                         document.getElementById('api-requests').textContent = data.apiRequests;
@@ -1035,16 +1038,12 @@
             
             const formData = new FormData(e.target);
             const data = {
-                botName: formData.get('botName'),
-                botId: formData.get('botId'),
                 email: formData.get('email'),
-                description: formData.get('description'),
-                reason: formData.get('reason'),
-                timestamp: new Date().toISOString()
+                description: formData.get('description')
             };
             
             try {
-                const response = await fetch(CORS_PROXY + encodeURIComponent(API_BASE + '/api/partner/apply'), {
+                const response = await fetch(API_URL + '/api/partner/apply', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -1054,14 +1053,14 @@
                 
                 if (response.ok) {
                     const result = await response.json();
-                    alert('✅ Application Submitted Successfully!\n\nYou will receive approval status within 24-48 hours.\n\nIf approved, send $50 to:\nkurraschgamingmerchstore@gmail.com\n\nNote: "Nova Frame Partnership - ' + data.botName + '"');
+                    alert('✅ Application Submitted Successfully!\n\nYou will receive approval status within 24-48 hours.\n\nIf approved, send $50 to:\n' + result.paypal + '\n\nNote: "Nova Frame Partnership - ' + data.email + '"');
                     e.target.reset();
                     navigateTo('dashboard');
                 } else {
                     alert('❌ Submission failed. Please try again or contact support.');
                 }
             } catch (error) {
-                alert('⚠️ Could not connect to Nova Frame API.\n\nYour application has been saved locally.\n\nPlease email your application to:\nkurraschgamingmerchstore@gmail.com\n\nInclude: Bot Name, Bot ID, and description.');
+                alert('⚠️ Could not connect to Nova Frame API.\n\nYour application has been saved locally.\n\nPlease email your application to:\nkurraschgamingmerchstore@gmail.com\n\nInclude: Email and description.');
                 console.error('Form submission error:', error);
             }
         });
@@ -1069,7 +1068,7 @@
         // Initialize
         console.log('%c Nova Frame Security Hub ', 'background: linear-gradient(135deg, #667eea, #764ba2); color: white; font-size: 16px; padding: 10px;');
         console.log('🔒 Real-time security monitoring active');
-        console.log('📡 API Endpoint: http://localhost:25723');
+        console.log('📡 API Endpoint: http://69.164.251.89:25724');
         console.log('💳 Partnership: $50 one-time fee');
         console.log('📧 Contact: kurraschgamingmerchstore@gmail.com');
     </script>
