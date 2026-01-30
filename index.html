@@ -25,6 +25,8 @@
             --warning: #ffaa00;
             --success: #00ff41;
             --info: #00d4ff;
+            --roblox: #ff6b6b;
+            --purple: #a855f7;
         }
 
         * {
@@ -44,6 +46,46 @@
             color: var(--text-primary);
         }
 
+        /* Critical Alert Banner */
+        .critical-banner {
+            background: linear-gradient(90deg, #ff3333, #cc0000);
+            color: white;
+            padding: 12px 20px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 14px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            animation: bannerPulse 2s ease-in-out infinite;
+        }
+
+        .critical-banner i {
+            font-size: 18px;
+            animation: shake 0.5s ease-in-out infinite;
+        }
+
+        @keyframes bannerPulse {
+            0%, 100% { background: linear-gradient(90deg, #ff3333, #cc0000); }
+            50% { background: linear-gradient(90deg, #cc0000, #ff3333); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-5deg); }
+            75% { transform: rotate(5deg); }
+        }
+
+        .critical-banner .banner-text {
+            max-width: 900px;
+        }
+
         /* Matrix Rain Canvas */
         #matrix-bg {
             position: fixed;
@@ -61,6 +103,7 @@
             height: 100vh;
             position: relative;
             z-index: 1;
+            padding-top: 48px; /* Account for critical banner */
         }
 
         /* Sidebar */
@@ -119,6 +162,15 @@
             margin-top: 6px;
             letter-spacing: 3px;
             text-transform: uppercase;
+        }
+
+        .company-badge {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 9px;
+            color: var(--matrix-green);
+            margin-top: 4px;
+            letter-spacing: 1px;
+            opacity: 0.8;
         }
 
         /* User Profile Section */
@@ -242,6 +294,10 @@
 
         .nav-badge.danger {
             background: var(--danger);
+        }
+
+        .nav-badge.new {
+            background: var(--info);
         }
 
         /* Login Button */
@@ -405,6 +461,22 @@
             background: var(--matrix-green);
         }
 
+        .stat-card.roblox::before {
+            background: var(--roblox);
+        }
+
+        .stat-card.website::before {
+            background: var(--info);
+        }
+
+        .stat-card.txadmin::before {
+            background: var(--warning);
+        }
+
+        .stat-card.purple::before {
+            background: var(--purple);
+        }
+
         .stat-icon {
             width: 48px;
             height: 48px;
@@ -418,18 +490,61 @@
             margin-bottom: 16px;
         }
 
+        .stat-icon.roblox {
+            background: rgba(255, 107, 107, 0.1);
+            color: var(--roblox);
+        }
+
+        .stat-icon.website {
+            background: rgba(0, 212, 255, 0.1);
+            color: var(--info);
+        }
+
+        .stat-icon.txadmin {
+            background: rgba(255, 170, 0, 0.1);
+            color: var(--warning);
+        }
+
+        .stat-icon.purple {
+            background: rgba(168, 85, 247, 0.1);
+            color: var(--purple);
+        }
+
         .stat-value {
             font-family: 'Orbitron', sans-serif;
-            font-size: 32px;
+            font-size: 28px;
             font-weight: 700;
             color: var(--matrix-green);
             text-shadow: 0 0 20px var(--matrix-glow);
+        }
+
+        .stat-value.roblox {
+            color: var(--roblox);
+        }
+
+        .stat-value.website {
+            color: var(--info);
+        }
+
+        .stat-value.txadmin {
+            color: var(--warning);
+        }
+
+        .stat-value.purple {
+            color: var(--purple);
         }
 
         .stat-label {
             font-size: 13px;
             color: var(--text-secondary);
             margin-top: 4px;
+        }
+
+        .stat-sublabel {
+            font-size: 11px;
+            color: var(--text-secondary);
+            opacity: 0.7;
+            margin-top: 2px;
         }
 
         /* Live Feed */
@@ -519,16 +634,48 @@
         .feed-type.system { color: var(--warning); }
         .feed-type.storage { color: #a855f7; }
         .feed-type.roblox { color: #ff6b6b; }
+        .feed-type.website { color: #00d4ff; }
+        .feed-type.txadmin { color: #ffaa00; }
 
         .feed-message {
             flex: 1;
             color: var(--text-secondary);
         }
 
-        /* Status Page */
+        /* Status Page - Expanded Grid */
+        .status-section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--matrix-green);
+            margin-bottom: 16px;
+            margin-top: 32px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .status-section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        .status-section-title.roblox {
+            color: var(--roblox);
+        }
+
+        .status-section-title.website {
+            color: var(--info);
+        }
+
+        .status-section-title.txadmin {
+            color: var(--warning);
+        }
+
         .status-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
             margin-bottom: 32px;
         }
@@ -538,6 +685,18 @@
             border: 1px solid var(--border-color);
             border-radius: 12px;
             padding: 24px;
+        }
+
+        .status-card.roblox {
+            border-color: rgba(255, 107, 107, 0.3);
+        }
+
+        .status-card.website {
+            border-color: rgba(0, 212, 255, 0.3);
+        }
+
+        .status-card.txadmin {
+            border-color: rgba(255, 170, 0, 0.3);
         }
 
         .status-card-header {
@@ -591,6 +750,10 @@
             gap: 16px;
         }
 
+        .status-metrics.two-col {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
         .status-metric {
             text-align: center;
         }
@@ -602,10 +765,70 @@
             color: var(--matrix-green);
         }
 
+        .status-metric-value.roblox {
+            color: var(--roblox);
+        }
+
+        .status-metric-value.website {
+            color: var(--info);
+        }
+
+        .status-metric-value.txadmin {
+            color: var(--warning);
+        }
+
         .status-metric-label {
             font-size: 11px;
             color: var(--text-secondary);
             margin-top: 4px;
+        }
+
+        /* Mini Stats Grid */
+        .mini-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .mini-stat {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .mini-stat.roblox {
+            border-color: rgba(255, 107, 107, 0.2);
+        }
+
+        .mini-stat.website {
+            border-color: rgba(0, 212, 255, 0.2);
+        }
+
+        .mini-stat.txadmin {
+            border-color: rgba(255, 170, 0, 0.2);
+        }
+
+        .mini-stat-value {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--matrix-green);
+        }
+
+        .mini-stat-value.roblox { color: var(--roblox); }
+        .mini-stat-value.website { color: var(--info); }
+        .mini-stat-value.txadmin { color: var(--warning); }
+        .mini-stat-value.purple { color: var(--purple); }
+
+        .mini-stat-label {
+            font-size: 11px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         /* Content Sections */
@@ -639,6 +862,15 @@
             border-bottom: 1px solid var(--border-color);
         }
 
+        .content-card h4 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--matrix-green);
+            margin-top: 20px;
+            margin-bottom: 12px;
+        }
+
         .content-card p {
             line-height: 1.8;
             color: var(--text-secondary);
@@ -666,6 +898,78 @@
             font-weight: bold;
         }
 
+        .content-card li.roblox::before {
+            color: var(--roblox);
+        }
+
+        .content-card li.website::before {
+            color: var(--info);
+        }
+
+        .hero-text {
+            font-size: 18px;
+            color: var(--text-primary);
+            line-height: 1.8;
+            margin-bottom: 24px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 24px 0;
+        }
+
+        .feature-box {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+        }
+
+        .feature-box.roblox {
+            border-color: rgba(255, 107, 107, 0.3);
+        }
+
+        .feature-box.website {
+            border-color: rgba(0, 212, 255, 0.3);
+        }
+
+        .feature-box.txadmin {
+            border-color: rgba(255, 170, 0, 0.3);
+        }
+
+        .feature-box h4 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 14px;
+            color: var(--matrix-green);
+            margin: 0 0 12px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .feature-box.roblox h4 {
+            color: var(--roblox);
+        }
+
+        .feature-box.website h4 {
+            color: var(--info);
+        }
+
+        .feature-box.txadmin h4 {
+            color: var(--warning);
+        }
+
+        .feature-box ul {
+            margin: 0;
+        }
+
+        .feature-box li {
+            padding: 6px 0;
+            font-size: 13px;
+        }
+
         /* Code Blocks */
         .code-block {
             background: var(--bg-primary);
@@ -677,6 +981,12 @@
             color: var(--matrix-green);
             overflow-x: auto;
             margin: 16px 0;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+
+        .code-block.small {
+            font-size: 11px;
         }
 
         /* Alert Boxes */
@@ -724,6 +1034,15 @@
             color: var(--success);
         }
 
+        .alert-box.roblox {
+            background: rgba(255, 107, 107, 0.1);
+            border: 1px solid rgba(255, 107, 107, 0.3);
+        }
+
+        .alert-box.roblox i {
+            color: var(--roblox);
+        }
+
         .alert-box i {
             font-size: 20px;
             flex-shrink: 0;
@@ -733,12 +1052,22 @@
             font-weight: 600;
             margin-bottom: 8px;
             color: var(--text-primary);
+            margin-top: 0;
         }
 
         .alert-box-content p {
             margin: 0;
             font-size: 14px;
             color: var(--text-secondary);
+        }
+
+        .alert-box-content ul {
+            margin: 8px 0 0 0;
+        }
+
+        .alert-box-content li {
+            padding: 4px 0;
+            font-size: 13px;
         }
 
         /* Platform Cards */
@@ -768,6 +1097,10 @@
 
         .platform-card.coming-soon {
             opacity: 0.6;
+        }
+
+        .platform-card.txadmin-only {
+            border-color: rgba(255, 170, 0, 0.3);
         }
 
         .platform-header {
@@ -822,6 +1155,99 @@
             font-size: 13px;
             color: var(--text-secondary);
             line-height: 1.6;
+        }
+
+        /* Pricing Tables */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 24px 0;
+        }
+
+        .pricing-card {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .pricing-card.featured {
+            border-color: var(--matrix-green);
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.1);
+        }
+
+        .pricing-card.roblox {
+            border-color: rgba(255, 107, 107, 0.3);
+        }
+
+        .pricing-card.website {
+            border-color: rgba(0, 212, 255, 0.3);
+        }
+
+        .pricing-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .pricing-price {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--matrix-green);
+            margin-bottom: 8px;
+        }
+
+        .pricing-price.roblox {
+            color: var(--roblox);
+        }
+
+        .pricing-price.website {
+            color: var(--info);
+        }
+
+        .pricing-period {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+
+        .pricing-features {
+            text-align: left;
+            margin-bottom: 16px;
+        }
+
+        .pricing-features li {
+            padding: 6px 0;
+            font-size: 13px;
+        }
+
+        .pricing-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .pricing-badge.trial {
+            background: rgba(0, 255, 65, 0.1);
+            color: var(--success);
+        }
+
+        .pricing-badge.no-trial {
+            background: rgba(255, 170, 0, 0.1);
+            color: var(--warning);
+        }
+
+        .pricing-badge.no-refund {
+            background: rgba(255, 51, 51, 0.1);
+            color: var(--danger);
         }
 
         /* Partnership Form */
@@ -884,6 +1310,30 @@
             box-shadow: 0 0 30px var(--matrix-glow);
         }
 
+        .payment-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px 28px;
+            background: #0070ba;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .payment-btn:hover {
+            background: #005ea6;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 112, 186, 0.4);
+        }
+
         /* Fee Box */
         .fee-box {
             background: linear-gradient(135deg, rgba(0, 255, 65, 0.1), rgba(0, 255, 65, 0.05));
@@ -892,6 +1342,11 @@
             padding: 32px;
             text-align: center;
             margin-bottom: 32px;
+        }
+
+        .fee-box.roblox {
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(255, 107, 107, 0.05));
+            border-color: var(--roblox);
         }
 
         .fee-label {
@@ -910,9 +1365,76 @@
             margin: 16px 0;
         }
 
+        .fee-amount.roblox {
+            color: var(--roblox);
+        }
+
         .fee-details {
             font-size: 13px;
             color: var(--text-secondary);
+        }
+
+        /* Commands Section */
+        .commands-category {
+            margin-bottom: 32px;
+        }
+
+        .commands-category h4 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 14px;
+            color: var(--matrix-green);
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .commands-category.roblox h4 {
+            color: var(--roblox);
+        }
+
+        .command-item {
+            display: flex;
+            gap: 16px;
+            padding: 12px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 8px;
+        }
+
+        .command-item code {
+            font-family: 'Share Tech Mono', monospace;
+            color: var(--matrix-green);
+            white-space: nowrap;
+            min-width: 280px;
+        }
+
+        .command-item.roblox code {
+            color: var(--roblox);
+        }
+
+        .command-desc {
+            color: var(--text-secondary);
+            font-size: 13px;
+        }
+
+        .command-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 8px;
+        }
+
+        .command-simple {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 12px;
+            color: var(--matrix-green);
+            padding: 8px 12px;
+            background: var(--bg-tertiary);
+            border-radius: 4px;
+        }
+
+        .command-simple.roblox {
+            color: var(--roblox);
         }
 
         /* My Bots Section */
@@ -1162,7 +1684,7 @@
             .sidebar {
                 position: fixed;
                 left: -260px;
-                top: 0;
+                top: 48px;
                 bottom: 0;
                 z-index: 100;
                 transition: left 0.3s ease;
@@ -1182,6 +1704,11 @@
 
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
+            }
+
+            .critical-banner {
+                font-size: 12px;
+                padding: 10px 15px;
             }
         }
 
@@ -1235,99 +1762,7 @@
             max-width: 400px;
         }
 
-        /* Glitch Effect */
-        .glitch {
-            position: relative;
-        }
-
-        .glitch::before,
-        .glitch::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        .glitch::before {
-            left: 2px;
-            text-shadow: -2px 0 #ff00c1;
-            clip: rect(44px, 450px, 56px, 0);
-            animation: glitch-1 5s infinite linear alternate-reverse;
-        }
-
-        .glitch::after {
-            left: -2px;
-            text-shadow: -2px 0 #00fff9;
-            clip: rect(44px, 450px, 56px, 0);
-            animation: glitch-2 5s infinite linear alternate-reverse;
-        }
-
-        @keyframes glitch-1 {
-            0% { clip: rect(132px, 350px, 101px, 30px); }
-            5% { clip: rect(17px, 350px, 94px, 30px); }
-            10% { clip: rect(40px, 350px, 66px, 30px); }
-            15% { clip: rect(87px, 350px, 82px, 30px); }
-            20% { clip: rect(137px, 350px, 61px, 30px); }
-            25% { clip: rect(34px, 350px, 14px, 30px); }
-            30% { clip: rect(133px, 350px, 74px, 30px); }
-            35% { clip: rect(76px, 350px, 107px, 30px); }
-            40% { clip: rect(59px, 350px, 130px, 30px); }
-            45% { clip: rect(29px, 350px, 84px, 30px); }
-            50% { clip: rect(22px, 350px, 67px, 30px); }
-            55% { clip: rect(67px, 350px, 62px, 30px); }
-            60% { clip: rect(10px, 350px, 105px, 30px); }
-            65% { clip: rect(78px, 350px, 115px, 30px); }
-            70% { clip: rect(105px, 350px, 13px, 30px); }
-            75% { clip: rect(15px, 350px, 75px, 30px); }
-            80% { clip: rect(66px, 350px, 39px, 30px); }
-            85% { clip: rect(133px, 350px, 73px, 30px); }
-            90% { clip: rect(36px, 350px, 128px, 30px); }
-            95% { clip: rect(68px, 350px, 103px, 30px); }
-            100% { clip: rect(14px, 350px, 100px, 30px); }
-        }
-
-        @keyframes glitch-2 {
-            0% { clip: rect(129px, 350px, 36px, 30px); }
-            5% { clip: rect(36px, 350px, 4px, 30px); }
-            10% { clip: rect(85px, 350px, 66px, 30px); }
-            15% { clip: rect(91px, 350px, 91px, 30px); }
-            20% { clip: rect(148px, 350px, 138px, 30px); }
-            25% { clip: rect(38px, 350px, 122px, 30px); }
-            30% { clip: rect(69px, 350px, 54px, 30px); }
-            35% { clip: rect(98px, 350px, 71px, 30px); }
-            40% { clip: rect(146px, 350px, 34px, 30px); }
-            45% { clip: rect(134px, 350px, 43px, 30px); }
-            50% { clip: rect(102px, 350px, 80px, 30px); }
-            55% { clip: rect(119px, 350px, 44px, 30px); }
-            60% { clip: rect(106px, 350px, 99px, 30px); }
-            65% { clip: rect(141px, 350px, 74px, 30px); }
-            70% { clip: rect(20px, 350px, 78px, 30px); }
-            75% { clip: rect(133px, 350px, 79px, 30px); }
-            80% { clip: rect(78px, 350px, 52px, 30px); }
-            85% { clip: rect(35px, 350px, 39px, 30px); }
-            90% { clip: rect(67px, 350px, 70px, 30px); }
-            95% { clip: rect(71px, 350px, 103px, 30px); }
-            100% { clip: rect(83px, 350px, 40px, 30px); }
-        }
-
-        /* Terminal cursor */
-        .cursor {
-            display: inline-block;
-            width: 10px;
-            height: 20px;
-            background: var(--matrix-green);
-            animation: blink 1s step-end infinite;
-            vertical-align: middle;
-            margin-left: 4px;
-        }
-
-        /* Roblox specific styles */
-        .roblox-icon {
-            color: #ff6b6b;
-        }
-
+        /* Platform tabs */
         .platform-tabs {
             display: flex;
             gap: 12px;
@@ -1362,33 +1797,50 @@
             color: #ff6b6b;
         }
 
-        .token-coming-soon {
-            background: rgba(0, 212, 255, 0.1);
-            border: 1px solid rgba(0, 212, 255, 0.3);
-            border-radius: 8px;
-            padding: 16px 20px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-top: 16px;
+        /* Legal Document Styling */
+        .legal-section {
+            margin-bottom: 32px;
         }
 
-        .token-coming-soon i {
-            color: var(--info);
-            font-size: 20px;
+        .legal-section h3 {
+            color: var(--matrix-green);
         }
 
-        .token-coming-soon span {
+        .legal-date {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 12px;
             color: var(--text-secondary);
-            font-size: 14px;
+            margin-bottom: 24px;
         }
 
-        .token-coming-soon strong {
-            color: var(--info);
+        .legal-highlight {
+            background: rgba(0, 255, 65, 0.05);
+            border-left: 3px solid var(--matrix-green);
+            padding: 16px;
+            margin: 16px 0;
+        }
+
+        .legal-highlight.danger {
+            background: rgba(255, 51, 51, 0.05);
+            border-color: var(--danger);
+        }
+
+        .legal-highlight.warning {
+            background: rgba(255, 170, 0, 0.05);
+            border-color: var(--warning);
         }
     </style>
 </head>
 <body>
+    <!-- CRITICAL ALERT BANNER -->
+    <div class="critical-banner" data-testid="critical-banner">
+        <i class="fas fa-exclamation-triangle"></i>
+        <span class="banner-text">
+            <strong>IMPORTANT:</strong> This bot currently CANNOT join your server. That function is coming soon. 
+            For now, the bot operates exclusively from our official NovaFrame Discord server.
+        </span>
+    </div>
+
     <!-- Matrix Rain Background -->
     <canvas id="matrix-bg"></canvas>
 
@@ -1401,6 +1853,7 @@
                     NOVA FRAME
                 </div>
                 <div class="tagline">Security Infrastructure Platform</div>
+                <div class="company-badge">A Game Killer Studios Product</div>
             </div>
 
             <!-- User Section (shown when logged in) -->
@@ -1425,6 +1878,7 @@
                     <div class="nav-item" data-page="status" data-testid="nav-status">
                         <i class="fas fa-signal"></i>
                         System Status
+                        <span class="nav-badge new">50+</span>
                     </div>
                 </div>
 
@@ -1452,8 +1906,13 @@
                         Security Model
                     </div>
                     <div class="nav-item" data-page="api" data-testid="nav-api">
-                        <i class="fas fa-code"></i>
-                        API Overview
+                        <i class="fas fa-download"></i>
+                        API Installation
+                    </div>
+                    <div class="nav-item" data-page="commands" data-testid="nav-commands">
+                        <i class="fas fa-terminal"></i>
+                        Commands
+                        <span class="nav-badge new">NEW</span>
                     </div>
                     <div class="nav-item" data-page="integrations" data-testid="nav-integrations">
                         <i class="fas fa-puzzle-piece"></i>
@@ -1535,6 +1994,70 @@
                             <div class="stat-value" id="stat-uptime">--%</div>
                             <div class="stat-label">System Uptime</div>
                         </div>
+                        <div class="stat-card roblox" data-testid="stat-roblox-games">
+                            <div class="stat-icon roblox"><i class="fas fa-cube"></i></div>
+                            <div class="stat-value roblox" id="stat-roblox-games">--</div>
+                            <div class="stat-label">Roblox Games Protected</div>
+                        </div>
+                        <div class="stat-card website" data-testid="stat-websites">
+                            <div class="stat-icon website"><i class="fas fa-globe"></i></div>
+                            <div class="stat-value website" id="stat-websites">--</div>
+                            <div class="stat-label">Websites Protected</div>
+                        </div>
+                        <div class="stat-card txadmin" data-testid="stat-fivem">
+                            <div class="stat-icon txadmin"><i class="fas fa-car"></i></div>
+                            <div class="stat-value txadmin" id="stat-fivem">--</div>
+                            <div class="stat-label">FiveM Servers</div>
+                        </div>
+                        <div class="stat-card purple" data-testid="stat-dm-users">
+                            <div class="stat-icon purple"><i class="fas fa-comments"></i></div>
+                            <div class="stat-value purple" id="stat-dm-users">--</div>
+                            <div class="stat-label">Active DM Users</div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions for DM Users -->
+                    <div class="content-card" style="margin-bottom: 24px;">
+                        <h2 style="font-size: 18px;"><i class="fas fa-bolt"></i> Quick Actions</h2>
+                        <p style="margin-bottom: 16px;">You can interact with Nova Frame bot directly in Discord DMs! No server required.</p>
+                        <div class="feature-grid">
+                            <div class="feature-box">
+                                <h4><i class="fas fa-comments"></i> DM Commands</h4>
+                                <ul>
+                                    <li>Message the bot directly on Discord</li>
+                                    <li>Check your subscription status</li>
+                                    <li>Generate API tokens</li>
+                                    <li>View your bot/game stats</li>
+                                </ul>
+                            </div>
+                            <div class="feature-box roblox">
+                                <h4><i class="fas fa-cube"></i> Roblox Quick Start</h4>
+                                <ul>
+                                    <li class="roblox">Start 30-day FREE trial via DM</li>
+                                    <li class="roblox">Get integration code</li>
+                                    <li class="roblox">View anti-cheat reports</li>
+                                    <li class="roblox">Manage game tokens</li>
+                                </ul>
+                            </div>
+                            <div class="feature-box website">
+                                <h4><i class="fas fa-globe"></i> Website Quick Start</h4>
+                                <ul>
+                                    <li class="website">Start 7-day trial (Individual)</li>
+                                    <li class="website">Generate site tokens</li>
+                                    <li class="website">View threat reports</li>
+                                    <li class="website">Submit appeals (Business+)</li>
+                                </ul>
+                            </div>
+                            <div class="feature-box txadmin">
+                                <h4><i class="fas fa-car"></i> TxAdmin Quick Start</h4>
+                                <ul>
+                                    <li>Generate webhook via DM</li>
+                                    <li>Receive Discord notifications</li>
+                                    <li>Monitor server events</li>
+                                    <li>Crash alerts to your DMs</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="live-feed-container" data-testid="live-feed">
@@ -1557,6 +2080,14 @@
                         </div>
                     </div>
 
+                    <div class="alert-box danger">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <div class="alert-box-content">
+                            <h4>Bot Server Joining - Coming Soon</h4>
+                            <p>The Nova Frame bot currently CANNOT join your Discord server. This feature is under development. For now, all bot operations occur through our official NovaFrame Discord server.</p>
+                        </div>
+                    </div>
+
                     <div class="alert-box warning">
                         <i class="fas fa-exclamation-triangle"></i>
                         <div class="alert-box-content">
@@ -1566,14 +2097,18 @@
                     </div>
                 </section>
 
-                <!-- Status Page -->
+                <!-- Status Page - MASSIVELY EXPANDED -->
                 <section class="page-section" id="page-status">
+                    <!-- Core Infrastructure -->
+                    <div class="status-section-title">
+                        <i class="fas fa-server"></i> Core Infrastructure
+                    </div>
                     <div class="status-grid">
                         <div class="status-card" data-testid="status-core-api">
                             <div class="status-card-header">
                                 <div class="status-card-title">
                                     <i class="fas fa-server"></i>
-                                    Core API
+                                    Core API (25724)
                                 </div>
                                 <div class="status-badge operational" id="status-api-badge">
                                     <span class="status-dot"></span>
@@ -1609,15 +2144,15 @@
                             </div>
                             <div class="status-metrics">
                                 <div class="status-metric">
-                                    <div class="status-metric-value">100%</div>
+                                    <div class="status-metric-value" id="discord-uptime">100%</div>
                                     <div class="status-metric-label">Uptime</div>
                                 </div>
                                 <div class="status-metric">
-                                    <div class="status-metric-value">42ms</div>
+                                    <div class="status-metric-value" id="discord-latency">42ms</div>
                                     <div class="status-metric-label">Latency</div>
                                 </div>
                                 <div class="status-metric">
-                                    <div class="status-metric-value">Active</div>
+                                    <div class="status-metric-value" id="discord-status">Active</div>
                                     <div class="status-metric-label">Status</div>
                                 </div>
                             </div>
@@ -1626,8 +2161,8 @@
                         <div class="status-card" data-testid="status-roblox">
                             <div class="status-card-header">
                                 <div class="status-card-title">
-                                    <i class="fas fa-cube roblox-icon"></i>
-                                    Roblox Gateway
+                                    <i class="fas fa-cube" style="color: var(--roblox);"></i>
+                                    Roblox Gateway (25725)
                                 </div>
                                 <div class="status-badge operational">
                                     <span class="status-dot"></span>
@@ -1636,16 +2171,16 @@
                             </div>
                             <div class="status-metrics">
                                 <div class="status-metric">
-                                    <div class="status-metric-value">99.8%</div>
+                                    <div class="status-metric-value roblox" id="roblox-uptime">99.8%</div>
                                     <div class="status-metric-label">Uptime</div>
                                 </div>
                                 <div class="status-metric">
-                                    <div class="status-metric-value">58ms</div>
+                                    <div class="status-metric-value roblox" id="roblox-latency">58ms</div>
                                     <div class="status-metric-label">Latency</div>
                                 </div>
                                 <div class="status-metric">
-                                    <div class="status-metric-value">Active</div>
-                                    <div class="status-metric-label">Status</div>
+                                    <div class="status-metric-value roblox" id="roblox-requests">--</div>
+                                    <div class="status-metric-label">Requests</div>
                                 </div>
                             </div>
                         </div>
@@ -1663,18 +2198,269 @@
                             </div>
                             <div class="status-metrics">
                                 <div class="status-metric">
-                                    <div class="status-metric-value">100%</div>
+                                    <div class="status-metric-value" id="storage-uptime">100%</div>
                                     <div class="status-metric-label">Uptime</div>
                                 </div>
                                 <div class="status-metric">
-                                    <div class="status-metric-value">12ms</div>
+                                    <div class="status-metric-value" id="storage-latency">12ms</div>
                                     <div class="status-metric-label">Latency</div>
                                 </div>
                                 <div class="status-metric">
-                                    <div class="status-metric-value">45%</div>
+                                    <div class="status-metric-value" id="storage-capacity">45%</div>
                                     <div class="status-metric-label">Capacity</div>
                                 </div>
                             </div>
+                        </div>
+
+                        <div class="status-card website" data-testid="status-website-api">
+                            <div class="status-card-header">
+                                <div class="status-card-title">
+                                    <i class="fas fa-globe" style="color: var(--info);"></i>
+                                    Website Security API (25726)
+                                </div>
+                                <div class="status-badge operational">
+                                    <span class="status-dot"></span>
+                                    Operational
+                                </div>
+                            </div>
+                            <div class="status-metrics">
+                                <div class="status-metric">
+                                    <div class="status-metric-value website" id="website-uptime">99.9%</div>
+                                    <div class="status-metric-label">Uptime</div>
+                                </div>
+                                <div class="status-metric">
+                                    <div class="status-metric-value website" id="website-latency">35ms</div>
+                                    <div class="status-metric-label">Latency</div>
+                                </div>
+                                <div class="status-metric">
+                                    <div class="status-metric-value website" id="website-requests">--</div>
+                                    <div class="status-metric-label">Requests</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="status-card txadmin" data-testid="status-txadmin">
+                            <div class="status-card-header">
+                                <div class="status-card-title">
+                                    <i class="fas fa-car" style="color: var(--warning);"></i>
+                                    TxAdmin Webhook (25727)
+                                </div>
+                                <div class="status-badge operational">
+                                    <span class="status-dot"></span>
+                                    Operational
+                                </div>
+                            </div>
+                            <div class="status-metrics">
+                                <div class="status-metric">
+                                    <div class="status-metric-value txadmin" id="txadmin-uptime">99.7%</div>
+                                    <div class="status-metric-label">Uptime</div>
+                                </div>
+                                <div class="status-metric">
+                                    <div class="status-metric-value txadmin" id="txadmin-latency">45ms</div>
+                                    <div class="status-metric-label">Latency</div>
+                                </div>
+                                <div class="status-metric">
+                                    <div class="status-metric-value txadmin" id="txadmin-events">--</div>
+                                    <div class="status-metric-label">Events</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- User & Partner Stats -->
+                    <div class="status-section-title">
+                        <i class="fas fa-users"></i> User & Partner Stats
+                    </div>
+                    <div class="mini-stats-grid">
+                        <div class="mini-stat">
+                            <div class="mini-stat-value" id="total-users">--</div>
+                            <div class="mini-stat-label">Total Users</div>
+                        </div>
+                        <div class="mini-stat">
+                            <div class="mini-stat-value" id="active-api-keys">--</div>
+                            <div class="mini-stat-label">Active API Keys</div>
+                        </div>
+                        <div class="mini-stat">
+                            <div class="mini-stat-value" id="approved-partners">--</div>
+                            <div class="mini-stat-label">Approved Partners</div>
+                        </div>
+                        <div class="mini-stat">
+                            <div class="mini-stat-value" id="bot-tokens-issued">--</div>
+                            <div class="mini-stat-label">Bot Tokens Issued</div>
+                        </div>
+                    </div>
+
+                    <!-- Roblox Security Stats -->
+                    <div class="status-section-title roblox">
+                        <i class="fas fa-cube"></i> Roblox Security Stats
+                    </div>
+                    <div class="mini-stats-grid">
+                        <div class="mini-stat roblox">
+                            <div class="mini-stat-value roblox" id="roblox-subs-trial">--</div>
+                            <div class="mini-stat-label">Active Trials</div>
+                        </div>
+                        <div class="mini-stat roblox">
+                            <div class="mini-stat-value roblox" id="roblox-subs-paid">--</div>
+                            <div class="mini-stat-label">Paid Subscriptions</div>
+                        </div>
+                        <div class="mini-stat roblox">
+                            <div class="mini-stat-value roblox" id="roblox-tokens">--</div>
+                            <div class="mini-stat-label">Roblox Tokens</div>
+                        </div>
+                        <div class="mini-stat roblox">
+                            <div class="mini-stat-value roblox" id="roblox-checks">--</div>
+                            <div class="mini-stat-label">Security Checks (24h)</div>
+                        </div>
+                        <div class="mini-stat roblox">
+                            <div class="mini-stat-value roblox" id="roblox-groups">--</div>
+                            <div class="mini-stat-label">Groups Monitored</div>
+                        </div>
+                        <div class="mini-stat roblox">
+                            <div class="mini-stat-value roblox" id="roblox-anticheat">--</div>
+                            <div class="mini-stat-label">Anti-Cheat Detections</div>
+                        </div>
+                        <div class="mini-stat roblox">
+                            <div class="mini-stat-value roblox" id="roblox-revenue">$--</div>
+                            <div class="mini-stat-label">Monthly Revenue</div>
+                        </div>
+                    </div>
+
+                    <!-- Website Security Stats -->
+                    <div class="status-section-title website">
+                        <i class="fas fa-globe"></i> Website Security Stats
+                    </div>
+                    <div class="mini-stats-grid">
+                        <div class="mini-stat website">
+                            <div class="mini-stat-value website" id="website-subs-trial">--</div>
+                            <div class="mini-stat-label">Active Trials</div>
+                        </div>
+                        <div class="mini-stat website">
+                            <div class="mini-stat-value website" id="website-subs-paid">--</div>
+                            <div class="mini-stat-label">Paid Subscriptions</div>
+                        </div>
+                        <div class="mini-stat website">
+                            <div class="mini-stat-value website" id="website-total-sites">--</div>
+                            <div class="mini-stat-label">Total Sites</div>
+                        </div>
+                        <div class="mini-stat website">
+                            <div class="mini-stat-value website" id="website-ddos">--</div>
+                            <div class="mini-stat-label">DDoS Blocked (24h)</div>
+                        </div>
+                        <div class="mini-stat website">
+                            <div class="mini-stat-value website" id="website-sqli">--</div>
+                            <div class="mini-stat-label">SQL Injection (24h)</div>
+                        </div>
+                        <div class="mini-stat website">
+                            <div class="mini-stat-value website" id="website-xss">--</div>
+                            <div class="mini-stat-label">XSS Blocked (24h)</div>
+                        </div>
+                        <div class="mini-stat website">
+                            <div class="mini-stat-value website" id="website-brute">--</div>
+                            <div class="mini-stat-label">Brute Force (24h)</div>
+                        </div>
+                        <div class="mini-stat website">
+                            <div class="mini-stat-value website" id="website-blocked-ips">--</div>
+                            <div class="mini-stat-label">Blocked IPs</div>
+                        </div>
+                        <div class="mini-stat website">
+                            <div class="mini-stat-value website" id="website-firewalls">--</div>
+                            <div class="mini-stat-label">Active Firewalls</div>
+                        </div>
+                        <div class="mini-stat website">
+                            <div class="mini-stat-value website" id="website-appeals">--</div>
+                            <div class="mini-stat-label">Pending Appeals</div>
+                        </div>
+                        <div class="mini-stat website">
+                            <div class="mini-stat-value website" id="website-revenue">$--</div>
+                            <div class="mini-stat-label">Monthly Revenue</div>
+                        </div>
+                    </div>
+
+                    <!-- TxAdmin Stats -->
+                    <div class="status-section-title txadmin">
+                        <i class="fas fa-car"></i> TxAdmin / FiveM Stats
+                    </div>
+                    <div class="mini-stats-grid">
+                        <div class="mini-stat txadmin">
+                            <div class="mini-stat-value txadmin" id="txadmin-webhooks">--</div>
+                            <div class="mini-stat-label">Active Webhooks</div>
+                        </div>
+                        <div class="mini-stat txadmin">
+                            <div class="mini-stat-value txadmin" id="fivem-servers">--</div>
+                            <div class="mini-stat-label">FiveM Servers</div>
+                        </div>
+                        <div class="mini-stat txadmin">
+                            <div class="mini-stat-value txadmin" id="txadmin-events-24h">--</div>
+                            <div class="mini-stat-label">Events Logged (24h)</div>
+                        </div>
+                        <div class="mini-stat txadmin">
+                            <div class="mini-stat-value txadmin" id="server-crashes">--</div>
+                            <div class="mini-stat-label">Crashes Detected (24h)</div>
+                        </div>
+                    </div>
+
+                    <!-- Discord Bot Stats -->
+                    <div class="status-section-title">
+                        <i class="fab fa-discord"></i> Discord Bot Stats
+                    </div>
+                    <div class="mini-stats-grid">
+                        <div class="mini-stat">
+                            <div class="mini-stat-value" id="discord-servers">--</div>
+                            <div class="mini-stat-label">Discord Servers</div>
+                        </div>
+                        <div class="mini-stat">
+                            <div class="mini-stat-value" id="discord-commands">--</div>
+                            <div class="mini-stat-label">Commands Executed</div>
+                        </div>
+                        <div class="mini-stat">
+                            <div class="mini-stat-value" id="server-templates">--</div>
+                            <div class="mini-stat-label">Templates Used</div>
+                        </div>
+                    </div>
+
+                    <!-- IAM Stats -->
+                    <div class="status-section-title" style="color: var(--purple);">
+                        <i class="fas fa-fingerprint"></i> Identity & Access Management
+                    </div>
+                    <div class="mini-stats-grid">
+                        <div class="mini-stat">
+                            <div class="mini-stat-value purple" id="active-sessions">--</div>
+                            <div class="mini-stat-label">Active Sessions</div>
+                        </div>
+                        <div class="mini-stat">
+                            <div class="mini-stat-value purple" id="creds-monitored">--</div>
+                            <div class="mini-stat-label">Credentials Monitored</div>
+                        </div>
+                        <div class="mini-stat">
+                            <div class="mini-stat-value purple" id="high-risk">--</div>
+                            <div class="mini-stat-label">High-Risk Accounts</div>
+                        </div>
+                        <div class="mini-stat">
+                            <div class="mini-stat-value purple" id="key-rotations">--</div>
+                            <div class="mini-stat-label">Key Rotations (Month)</div>
+                        </div>
+                    </div>
+
+                    <!-- Performance Metrics -->
+                    <div class="status-section-title">
+                        <i class="fas fa-tachometer-alt"></i> Performance Metrics
+                    </div>
+                    <div class="mini-stats-grid">
+                        <div class="mini-stat">
+                            <div class="mini-stat-value" id="avg-response">--ms</div>
+                            <div class="mini-stat-label">Avg Response Time</div>
+                        </div>
+                        <div class="mini-stat">
+                            <div class="mini-stat-value" id="peak-connections">--</div>
+                            <div class="mini-stat-label">Peak Connections</div>
+                        </div>
+                        <div class="mini-stat">
+                            <div class="mini-stat-value" id="bandwidth-24h">--GB</div>
+                            <div class="mini-stat-label">Bandwidth (24h)</div>
+                        </div>
+                        <div class="mini-stat">
+                            <div class="mini-stat-value" id="system-uptime-all">--%</div>
+                            <div class="mini-stat-label">All Services Uptime</div>
                         </div>
                     </div>
                 </section>
@@ -1684,31 +2470,56 @@
                     <div class="login-required" id="bots-login-required">
                         <i class="fas fa-lock"></i>
                         <h3>Authentication Required</h3>
-                        <p>Please log in with Discord to view and manage your connected bots.</p>
+                        <p>Please log in with Discord to view and manage your connected bots and games.</p>
                         <button class="login-btn" onclick="initiateLogin()">
                             <i class="fab fa-discord"></i>
                             Login with Discord
                         </button>
                     </div>
                     <div id="bots-content" style="display: none;">
+                        <div class="alert-box info" style="margin-bottom: 24px;">
+                            <i class="fas fa-info-circle"></i>
+                            <div class="alert-box-content">
+                                <h4>Your Bots & Games Only</h4>
+                                <p>This page shows only the bots and games that YOU own and have registered with Nova Frame. You cannot access or manage other users' bots.</p>
+                            </div>
+                        </div>
+
+                        <!-- Server Selection (for users with multiple servers) -->
+                        <div class="content-card" style="margin-bottom: 24px;" id="server-selection-card">
+                            <h3 style="margin-top: 0;"><i class="fas fa-server"></i> Select Server</h3>
+                            <p style="margin-bottom: 16px; color: var(--text-secondary);">Choose a server to view its associated bots and games.</p>
+                            <div class="form-group" style="margin-bottom: 0;">
+                                <select id="server-select" onchange="onServerSelect(this.value)">
+                                    <option value="">-- Select your server --</option>
+                                </select>
+                            </div>
+                        </div>
+
                         <div class="platform-tabs">
                             <div class="platform-tab active" data-platform="all" onclick="filterBots('all')">
-                                <i class="fas fa-layer-group"></i> All Bots
+                                <i class="fas fa-layer-group"></i> All
                             </div>
                             <div class="platform-tab" data-platform="discord" onclick="filterBots('discord')">
-                                <i class="fab fa-discord"></i> Discord
+                                <i class="fab fa-discord"></i> Discord Bots
                             </div>
                             <div class="platform-tab roblox" data-platform="roblox" onclick="filterBots('roblox')">
-                                <i class="fas fa-cube"></i> Roblox
+                                <i class="fas fa-cube"></i> Roblox Games
+                            </div>
+                            <div class="platform-tab" data-platform="website" onclick="filterBots('website')" style="border-color: var(--info);">
+                                <i class="fas fa-globe"></i> Websites
+                            </div>
+                            <div class="platform-tab" data-platform="fivem" onclick="filterBots('fivem')" style="border-color: var(--warning);">
+                                <i class="fas fa-car"></i> FiveM
                             </div>
                         </div>
                         <div class="bots-grid" id="bots-grid"></div>
                         <div class="empty-state" id="no-bots">
                             <i class="fas fa-robot"></i>
-                            <h3>No Bots Connected</h3>
-                            <p>You don't have any bots connected to Nova Frame yet. Apply for partnership to get started.</p>
+                            <h3>No Bots/Games Connected</h3>
+                            <p>You don't have any bots, games, or sites connected to Nova Frame yet. Apply for partnership or start a trial to get started.</p>
                             <button class="submit-btn" onclick="navigateTo('partner')" style="max-width: 300px; margin: 0 auto;">
-                                Apply for Partnership
+                                Get Started
                             </button>
                         </div>
                     </div>
@@ -1775,45 +2586,185 @@
                     </div>
                 </section>
 
-                <!-- About Page -->
+                <!-- About Page - COMPLETELY REWRITTEN -->
                 <section class="page-section" id="page-about">
                     <div class="content-card">
                         <h2><i class="fas fa-info-circle"></i> What is Nova Frame?</h2>
-                        <p>Nova Frame is a comprehensive security infrastructure platform developed by Kurrasch Systems Game Killer Studio. It provides enterprise-grade protection, storage, and API services for Discord bots, Roblox experiences, and gaming platform integrations.</p>
+                        
+                        <p class="hero-text">
+                            Nova Frame is the <strong>ULTIMATE security infrastructure backbone</strong> developed by 
+                            <strong>Kurrasch Systems Game Killer Studio</strong>. We provide military-grade protection, 
+                            intelligent threat detection, and seamless API integration for gaming communities and developers.
+                        </p>
 
-                        <h3>Core Services</h3>
+                        <div class="feature-grid">
+                            <div class="feature-box">
+                                <h4><i class="fab fa-discord"></i> Discord Bot Developers</h4>
+                                <ul>
+                                    <li>Secure Token Management</li>
+                                    <li>Partner Storage Space</li>
+                                    <li>FDR (Failover Disaster Recovery)</li>
+                                    <li>Real-time Security Monitoring</li>
+                                </ul>
+                            </div>
+                            <div class="feature-box roblox">
+                                <h4><i class="fas fa-cube"></i> Roblox Game Creators</h4>
+                                <ul>
+                                    <li class="roblox">Anti-Cheat System</li>
+                                    <li class="roblox">Group Security Monitoring</li>
+                                    <li class="roblox">Commands System (50+)</li>
+                                    <li class="roblox">Livery System for Roleplay</li>
+                                </ul>
+                            </div>
+                            <div class="feature-box txadmin">
+                                <h4><i class="fas fa-car"></i> FiveM Server Owners</h4>
+                                <ul>
+                                    <li>TxAdmin Webhook Integration</li>
+                                    <li>Event Monitoring</li>
+                                    <li>Server Statistics</li>
+                                    <li>Discord Notifications</li>
+                                </ul>
+                            </div>
+                            <div class="feature-box website">
+                                <h4><i class="fas fa-globe"></i> Website Administrators</h4>
+                                <ul>
+                                    <li class="website">DDoS Protection</li>
+                                    <li class="website">SQL Injection Detection</li>
+                                    <li class="website">XSS Protection</li>
+                                    <li class="website">Custom Firewall Rules</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <h3>1. Discord Bot Infrastructure</h3>
                         <ul>
-                            <li><strong>Secure Token Management:</strong> Encrypted storage and automatic rotation of authentication tokens</li>
-                            <li><strong>Partner Storage:</strong> Dedicated storage space for bot configurations and data</li>
-                            <li><strong>FDR (Failover Disaster Recovery):</strong> Automatic failover systems to ensure 24/7 uptime</li>
-                            <li><strong>Real-time Security Monitoring:</strong> Live threat detection and automatic blocking</li>
-                            <li><strong>Multi-Platform Support:</strong> Discord, Roblox, FiveM, LSPDFR, and more</li>
+                            <li><strong>Secure Token Management:</strong> Encrypted storage and automatic rotation</li>
+                            <li><strong>Partner Storage:</strong> Dedicated storage space for bot configurations</li>
+                            <li><strong>FDR (Failover Disaster Recovery):</strong> Automatic failover for 24/7 uptime</li>
+                            <li><strong>Real-time Security Monitoring:</strong> Live threat detection and blocking</li>
+                            <li><strong>Bot Token Issuance:</strong> Custom tokens for verified bots (nf_xxx prefix)</li>
+                            <li><strong>Server Builder:</strong> Pre-configured Discord server templates</li>
                         </ul>
 
-                        <h3>How It Works</h3>
-                        <p>Partners integrate with Nova Frame through our secure REST API. Upon approval, you receive:</p>
-                        <ul>
-                            <li>Unique authentication token for API access</li>
-                            <li>Integration documentation and setup guides</li>
-                            <li>Access to storage, security, and FDR services</li>
-                            <li>Dashboard for monitoring and configuration</li>
-                        </ul>
-
-                        <div class="alert-box info">
-                            <i class="fas fa-lightbulb"></i>
+                        <h3>2. Roblox Security Suite</h3>
+                        <div class="alert-box roblox">
+                            <i class="fas fa-cube"></i>
                             <div class="alert-box-content">
-                                <h4>Important Note</h4>
-                                <p>Nova Frame provides infrastructure services - partners receive instructions and API access, NOT source code. All code remains protected by advanced security measures.</p>
+                                <h4>Comprehensive Roblox Protection</h4>
+                                <ul>
+                                    <li><strong>Anti-Cheat:</strong> Speed hacks, fly hacks, teleport, noclip, ESP, aimbots, infinite jump, walkspeed, god mode</li>
+                                    <li><strong>Anti-Lag:</strong> Physics optimization, server load reduction, part cleanup</li>
+                                    <li><strong>Group Security:</strong> Rank escalation, permission auditing, fund abuse, backdoor detection</li>
+                                    <li><strong>Commands:</strong> 50+ role-based commands (Owner, Admin, Staff, Civilian, LEO, Fire, EMS)</li>
+                                    <li><strong>Livery System:</strong> Auto-detect vehicle types, custom liveries for roleplay</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="pricing-grid">
+                            <div class="pricing-card roblox">
+                                <div class="pricing-name">Free Trial</div>
+                                <div class="pricing-price roblox">$0</div>
+                                <div class="pricing-period">30 Days - No Payment</div>
+                                <span class="pricing-badge trial">Start Free</span>
+                            </div>
+                            <div class="pricing-card roblox featured">
+                                <div class="pricing-name">Monthly</div>
+                                <div class="pricing-price roblox">$20</div>
+                                <div class="pricing-period">Per Month</div>
+                                <span class="pricing-badge trial">7-Day Refund</span>
+                            </div>
+                            <div class="pricing-card roblox">
+                                <div class="pricing-name">Custom Addon</div>
+                                <div class="pricing-price roblox">$35</div>
+                                <div class="pricing-period">One-Time</div>
+                                <span class="pricing-badge no-trial">Custom Features</span>
+                            </div>
+                        </div>
+
+                        <h3>3. Website Security Platform</h3>
+                        <ul>
+                            <li class="website"><strong>DDoS Protection:</strong> 1,000 req/min threshold, 1-hour auto-block</li>
+                            <li class="website"><strong>Brute Force Prevention:</strong> 10 failed attempts = 30-minute block</li>
+                            <li class="website"><strong>SQL Injection Detection:</strong> Pattern matching for malicious queries</li>
+                            <li class="website"><strong>XSS Protection:</strong> Script injection detection and blocking</li>
+                            <li class="website"><strong>Firewall Rules:</strong> Custom rules, IP blacklist/whitelist, geo-blocking</li>
+                            <li class="website"><strong>Auto Site Detection:</strong> Sites tracked automatically via API</li>
+                        </ul>
+
+                        <div class="pricing-grid">
+                            <div class="pricing-card website">
+                                <div class="pricing-name">Individual</div>
+                                <div class="pricing-price website">$5/mo</div>
+                                <div class="pricing-period">1 site | $60/yr for 5 sites</div>
+                                <span class="pricing-badge trial">7-Day Trial</span>
+                                <span class="pricing-badge no-refund">NO REFUNDS</span>
+                            </div>
+                            <div class="pricing-card website">
+                                <div class="pricing-name">Business</div>
+                                <div class="pricing-price website">$10/mo</div>
+                                <div class="pricing-period">3 sites | $120/yr for 8 sites</div>
+                                <span class="pricing-badge no-trial">No Trial</span>
+                                <span class="pricing-badge no-refund">NO REFUNDS</span>
+                            </div>
+                            <div class="pricing-card website featured">
+                                <div class="pricing-name">Mega Business</div>
+                                <div class="pricing-price website">$25/mo</div>
+                                <div class="pricing-period">8 sites | $300/yr for 20 sites</div>
+                                <span class="pricing-badge no-trial">No Trial</span>
+                                <span class="pricing-badge no-refund">NO REFUNDS</span>
+                            </div>
+                        </div>
+
+                        <h3>4. TxAdmin Integration (FiveM)</h3>
+                        <ul>
+                            <li><strong>Webhook Generation:</strong> Automatic webhook creation for servers</li>
+                            <li><strong>Event Monitoring:</strong> Player joins/leaves, kicks, bans, crashes</li>
+                            <li><strong>Server Statistics:</strong> Uptime tracking, player counts, resource usage</li>
+                            <li><strong>Discord Notifications:</strong> Real-time alerts with colored embeds</li>
+                            <li><strong>Log Storage:</strong> 30-day retention, 10,000 log limit</li>
+                        </ul>
+
+                        <h3>5. Identity & Access Management (IAM)</h3>
+                        <ul>
+                            <li><strong>Credential Monitoring:</strong> Track leaked credentials</li>
+                            <li><strong>Risk Scoring:</strong> Calculate account takeover risk</li>
+                            <li><strong>Session Monitoring:</strong> Track active sessions for anomalies</li>
+                            <li><strong>Key Rotation:</strong> 90-day automatic rotation enforcement</li>
+                        </ul>
+
+                        <div class="alert-box warning">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <div class="alert-box-content">
+                                <h4>Important Notes</h4>
+                                <p>Nova Frame provides <strong>INFRASTRUCTURE SERVICES</strong> - partners receive instructions and API access, NOT source code.</p>
+                            </div>
+                        </div>
+
+                        <div class="alert-box danger">
+                            <i class="fas fa-ban"></i>
+                            <div class="alert-box-content">
+                                <h4>Bot Cannot Join Servers (Yet)</h4>
+                                <p>The Discord bot <strong>CANNOT currently join your server</strong>. It operates from the official NovaFrame Discord server. Server joining coming soon.</p>
                             </div>
                         </div>
                     </div>
                 </section>
 
-                <!-- Security Model Page -->
+                <!-- Security Model Page - EXPANDED -->
                 <section class="page-section" id="page-security">
                     <div class="content-card">
                         <h2><i class="fas fa-lock"></i> Security Model</h2>
                         <p>Nova Frame employs multiple layers of security to protect partner data and prevent unauthorized access.</p>
+
+                        <h3>Token Systems</h3>
+                        <ul>
+                            <li><strong>Bot Token System:</strong> Custom tokens for Discord bots (nf_xxx prefix)</li>
+                            <li><strong>Roblox Token System:</strong> Game-specific tokens (rb_xxx prefix)</li>
+                            <li><strong>Website Token System:</strong> Site-specific tokens (ws_xxx prefix)</li>
+                            <li><strong>Token Expiry:</strong> 365-day default expiry</li>
+                            <li><strong>Token Rotation:</strong> Automatic rotation enforcement</li>
+                        </ul>
 
                         <h3>Authentication</h3>
                         <ul>
@@ -1825,25 +2776,71 @@
 
                         <h3>Encryption</h3>
                         <ul>
-                            <li><strong>At Rest:</strong> AES-256 encryption for all stored data</li>
-                            <li><strong>In Transit:</strong> TLS 1.3 for all API communications</li>
-                            <li><strong>Token Storage:</strong> Tokens are hashed and salted</li>
+                            <li><strong>Token Storage:</strong> Tokens hashed and salted</li>
+                            <li><strong>Data At Rest:</strong> AES-256 encryption</li>
+                            <li><strong>Data In Transit:</strong> TLS 1.3</li>
+                            <li><strong>Certificate Management:</strong> Auto-renewal</li>
                         </ul>
 
                         <h3>Port Security</h3>
-                        <div class="code-block">
-Port: 25724 (Custom secured port)
-Protocol: HTTPS only
-Scanning Protection: Auto-block after 3 failed attempts
-Rate Limit: 100 requests/minute per token
-                        </div>
+                        <div class="code-block">Port 25724 (Core API): HTTPS only, Rate limit: 100 req/min per token
+Port 25725 (Roblox API): HTTPS only, Rate limit: 100 req/min per token  
+Port 25726 (Website API): HTTPS only, Rate limit: 1000 req/min (DDoS protection)
+Port 25727 (TxAdmin): HTTPS only, Webhook validation</div>
 
-                        <h3>Threat Detection</h3>
+                        <h3>Discord Bot Threat Detection</h3>
                         <ul>
-                            <li><strong>Port Scanning:</strong> Auto-block after 3 invalid connection attempts</li>
-                            <li><strong>Brute Force:</strong> Account lockout after 5 failed authentications</li>
-                            <li><strong>DDoS:</strong> Automatic traffic shaping and blackholing</li>
+                            <li><strong>Port Scanning:</strong> Auto-block after 3 invalid attempts</li>
+                            <li><strong>Brute Force:</strong> Account lockout after 5 failed auths</li>
+                            <li><strong>DDoS:</strong> Traffic shaping and blackholing</li>
                             <li><strong>Injection:</strong> Input sanitization at all entry points</li>
+                        </ul>
+
+                        <h3>Roblox Security Detection</h3>
+                        <ul>
+                            <li class="roblox"><strong>Exploit Detection:</strong> Speed hacks, fly hacks, teleport, noclip, ESP, aimbot</li>
+                            <li class="roblox"><strong>Group Security:</strong> Rank escalation, permission abuse, fund drains</li>
+                            <li class="roblox"><strong>Asset Security:</strong> Backdoor detection, unauthorized models</li>
+                            <li class="roblox"><strong>Account Risk:</strong> Maturity mismatch, impersonation, suspicious patterns</li>
+                        </ul>
+
+                        <h3>Website Security Detection</h3>
+                        <ul>
+                            <li class="website"><strong>DDoS Protection:</strong> 1,000 req/min threshold</li>
+                            <li class="website"><strong>Brute Force:</strong> 10 failed attempts = block</li>
+                            <li class="website"><strong>SQL Injection:</strong> Pattern matching (SELECT, DROP, UNION, etc.)</li>
+                            <li class="website"><strong>XSS Protection:</strong> Script tag detection</li>
+                            <li class="website"><strong>Firewall:</strong> Custom rules, IP lists, geo-blocking</li>
+                        </ul>
+
+                        <h3>TxAdmin Security</h3>
+                        <ul>
+                            <li><strong>Webhook Validation:</strong> Secret token verification</li>
+                            <li><strong>Event Filtering:</strong> Configurable log types</li>
+                            <li><strong>Rate Limiting:</strong> Max 5 concurrent webhooks</li>
+                        </ul>
+
+                        <h3>IAM Security</h3>
+                        <ul>
+                            <li><strong>Credential Monitoring:</strong> Breach database checks</li>
+                            <li><strong>Risk Scoring:</strong> Multi-factor risk calculation</li>
+                            <li><strong>Session Tracking:</strong> Anomaly detection</li>
+                            <li><strong>Key Rotation:</strong> 90-day enforcement</li>
+                        </ul>
+
+                        <h3>User Isolation</h3>
+                        <ul>
+                            <li><strong>Namespace Isolation:</strong> Each user gets isolated storage</li>
+                            <li><strong>Cross-User Protection:</strong> Prevent data access between users</li>
+                            <li><strong>Role-Based Access:</strong> Strict permission enforcement</li>
+                        </ul>
+
+                        <h3>Incident Response</h3>
+                        <ul>
+                            <li><strong>Pre-Incident Snapshots:</strong> Automatic configuration backups</li>
+                            <li><strong>Evidence Collection:</strong> Forensic-ready timelines</li>
+                            <li><strong>Rollback Capability:</strong> Quick recovery from incidents</li>
+                            <li><strong>Appeal Documentation:</strong> Platform-ready evidence</li>
                         </ul>
 
                         <div class="alert-box danger">
@@ -1856,136 +2853,478 @@ Rate Limit: 100 requests/minute per token
                     </div>
                 </section>
 
-                <!-- API Overview Page -->
+                <!-- API Overview Page - FIXED -->
                 <section class="page-section" id="page-api">
                     <div class="content-card">
-                        <h2><i class="fas fa-code"></i> API Overview</h2>
-                        <p>Nova Frame provides a secure REST API for authenticated partners to interact with the platform. The same API key works across all supported platforms (Discord, Roblox, FiveM, etc.).</p>
+                        <h2><i class="fas fa-download"></i> API Installation Guide</h2>
+                        <p>Complete guide on how to install and integrate Nova Frame security into your projects.</p>
 
-                        <h3>Base URL</h3>
-                        <div class="code-block">https://api.novaframe.site:25724</div>
-
-                        <h3>Authentication</h3>
-                        <p>All API requests require an Authorization header:</p>
-                        <div class="code-block">
-Authorization: Bearer NF_[YOUR_TOKEN]
-Content-Type: application/json
-                        </div>
-
-                        <div class="alert-box success">
-                            <i class="fas fa-key"></i>
+                        <div class="alert-box info">
+                            <i class="fas fa-info-circle"></i>
                             <div class="alert-box-content">
-                                <h4>Universal API Key</h4>
-                                <p>Your Nova Frame API key works across all platforms - Discord, Roblox, FiveM, and more. No need for separate keys per platform.</p>
+                                <h4>How It Works</h4>
+                                <p>Nova Frame provides API tokens that you integrate into your Roblox games, Discord bots, websites, or FiveM servers. Once integrated, our system automatically monitors and protects your services.</p>
                             </div>
                         </div>
 
-                        <h3>Endpoints</h3>
-                        <table class="data-table">
-                            <thead>
-                                <tr>
-                                    <th>Method</th>
-                                    <th>Endpoint</th>
-                                    <th>Description</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><code>GET</code></td>
-                                    <td><code>/api/status</code></td>
-                                    <td>System status and metrics</td>
-                                </tr>
-                                <tr>
-                                    <td><code>GET</code></td>
-                                    <td><code>/api/feed</code></td>
-                                    <td>Live activity feed</td>
-                                </tr>
-                                <tr>
-                                    <td><code>POST</code></td>
-                                    <td><code>/api/partner/apply</code></td>
-                                    <td>Submit partnership application</td>
-                                </tr>
-                                <tr>
-                                    <td><code>GET</code></td>
-                                    <td><code>/api/bots</code></td>
-                                    <td>List authenticated user's bots (Discord & Roblox)</td>
-                                </tr>
-                                <tr>
-                                    <td><code>GET</code></td>
-                                    <td><code>/api/bots/:id</code></td>
-                                    <td>Get specific bot details</td>
-                                </tr>
-                                <tr>
-                                    <td><code>PUT</code></td>
-                                    <td><code>/api/bots/:id/fdr</code></td>
-                                    <td>Update FDR configuration</td>
-                                </tr>
-                                <tr>
-                                    <td><code>GET</code></td>
-                                    <td><code>/api/roblox/verify</code></td>
-                                    <td>Verify Roblox user authentication</td>
-                                </tr>
-                                <tr>
-                                    <td><code>POST</code></td>
-                                    <td><code>/api/roblox/webhook</code></td>
-                                    <td>Roblox event webhook receiver</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <h3>Step 1: Get Your API Credentials</h3>
+                        <p>Contact the Nova Frame bot via Discord DM or through our official server to:</p>
+                        <ul>
+                            <li>Generate your <strong>API Key</strong> (nf_xxx) - Your main authentication key</li>
+                            <li>Generate <strong>Security Tokens</strong> - Platform-specific tokens (rb_xxx for Roblox, ws_xxx for websites)</li>
+                        </ul>
+
+                        <h3>Step 2: Choose Your Platform</h3>
+
+                        <!-- Roblox Installation -->
+                        <div class="feature-box roblox" style="margin: 24px 0;">
+                            <h4><i class="fas fa-cube"></i> Roblox Game Installation</h4>
+                            <p style="margin-bottom: 16px; color: var(--text-secondary);">Add Nova Frame security to your Roblox game in minutes.</p>
+                            
+                            <p><strong>1. Get your credentials via Discord DM:</strong></p>
+                            <div class="code-block">DM the bot: /nova-roblox-trial [your-username] [roblox-username]
+You'll receive:
+- API Key: nf_your_key_here
+- Security Token: rb_your_token_here</div>
+
+                            <p><strong>2. Create a Script in ServerScriptService:</strong></p>
+                            <div class="code-block small">-- NovaFrame Security Integration
+-- Place this in ServerScriptService
+
+local HttpService = game:GetService("HttpService")
+local Players = game:GetService("Players")
+
+-- YOUR CREDENTIALS (from Discord DM)
+local API_KEY = "nf_your_api_key_here"
+local SECURITY_TOKEN = "rb_your_security_token_here"
+local API_URL = "https://api.novaframe.site:25725"
+
+-- Player Check Function
+local function checkPlayer(player)
+    local success, response = pcall(function()
+        return HttpService:RequestAsync({
+            Url = API_URL .. "/api/roblox/check-player",
+            Method = "POST",
+            Headers = {
+                ["Authorization"] = "Bearer " .. API_KEY,
+                ["X-Security-Token"] = SECURITY_TOKEN,
+                ["Content-Type"] = "application/json"
+            },
+            Body = HttpService:JSONEncode({
+                userId = player.UserId,
+                username = player.Name,
+                gameId = game.GameId
+            })
+        })
+    end)
+    
+    if success then
+        local data = HttpService:JSONDecode(response.Body)
+        if data.blocked then
+            player:Kick("Blocked by NovaFrame Security: " .. (data.reason or "Security violation"))
+        end
+    end
+end
+
+-- Connect to player joining
+Players.PlayerAdded:Connect(checkPlayer)
+
+print("[NovaFrame] Security system initialized")</div>
+
+                            <p><strong>3. Enable HTTP Requests:</strong></p>
+                            <ul>
+                                <li class="roblox">Go to Game Settings → Security</li>
+                                <li class="roblox">Enable "Allow HTTP Requests"</li>
+                                <li class="roblox">Publish your game</li>
+                            </ul>
+
+                            <p><strong>4. That's it!</strong> Anti-cheat, commands, and security features are now active.</p>
+                        </div>
+
+                        <!-- Discord Bot Installation -->
+                        <div class="feature-box" style="margin: 24px 0;">
+                            <h4><i class="fab fa-discord"></i> Discord Bot Installation</h4>
+                            <p style="margin-bottom: 16px; color: var(--text-secondary);">Integrate Nova Frame into your Discord bot for secure storage and FDR.</p>
+                            
+                            <p><strong>1. Apply for partnership ($50 one-time fee)</strong></p>
+                            <p><strong>2. Receive your bot token via Discord DM</strong></p>
+                            <div class="code-block">Your Bot Token: nf_abc123def456...
+API URL: https://api.novaframe.site:25724</div>
+
+                            <p><strong>3. Add to your bot code (Node.js example):</strong></p>
+                            <div class="code-block small">// Nova Frame Integration
+const NOVA_API = 'https://api.novaframe.site:25724';
+const NOVA_TOKEN = 'nf_your_bot_token_here';
+
+// Store data
+async function storeData(key, value) {
+    const response = await fetch(`${NOVA_API}/api/storage/set`, {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${NOVA_TOKEN}`,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ key, value })
+    });
+    return response.json();
+}
+
+// Get data
+async function getData(key) {
+    const response = await fetch(`${NOVA_API}/api/storage/get?key=${key}`, {
+        headers: { 'Authorization': `Bearer ${NOVA_TOKEN}` }
+    });
+    return response.json();
+}</div>
+                        </div>
+
+                        <!-- TxAdmin Installation - SIMPLIFIED -->
+                        <div class="feature-box txadmin" style="margin: 24px 0;">
+                            <h4><i class="fas fa-car"></i> TxAdmin / FiveM Integration</h4>
+                            <p style="margin-bottom: 16px; color: var(--text-secondary);">Get Discord notifications for your FiveM server with ZERO coding required!</p>
+                            
+                            <div class="alert-box success" style="margin: 16px 0;">
+                                <i class="fas fa-magic"></i>
+                                <div class="alert-box-content">
+                                    <h4>Super Easy Setup - No Coding!</h4>
+                                    <p>You give us your TxAdmin webhook URL, we give you a Discord webhook. That's it!</p>
+                                </div>
+                            </div>
+
+                            <p><strong>How it works:</strong></p>
+                            <ol style="list-style: decimal; padding-left: 28px; margin-bottom: 16px;">
+                                <li style="padding: 8px 0;">DM the Nova Frame bot: <code style="color: var(--warning);">/nova-txadmin-webhook [username] [server-id] [server-name]</code></li>
+                                <li style="padding: 8px 0;">You'll receive a <strong>Discord Webhook URL</strong> from us</li>
+                                <li style="padding: 8px 0;">Open your <strong>TxAdmin</strong> panel → Settings → Discord</li>
+                                <li style="padding: 8px 0;">Paste our webhook URL into TxAdmin's webhook field</li>
+                                <li style="padding: 8px 0;"><strong>Done!</strong> All server events now go to Discord automatically</li>
+                            </ol>
+
+                            <p><strong>What you get:</strong></p>
+                            <ul>
+                                <li>Player join/leave notifications</li>
+                                <li>Kick and ban alerts</li>
+                                <li>Server crash notifications (sent to your DMs too!)</li>
+                                <li>Resource errors and warnings</li>
+                                <li>Admin actions logging</li>
+                                <li>Beautiful Discord embeds with colors</li>
+                            </ul>
+
+                            <div class="code-block">// You DON'T need to code anything!
+// Just paste the webhook we give you into TxAdmin.
+
+// Example webhook URL you'll receive:
+// https://discord.com/api/webhooks/123456789/abc123xyz...
+
+// TxAdmin automatically sends events to this webhook
+// We format them nicely and send to your Discord channel</div>
+                        </div>
+
+                        <!-- Website Security Installation -->
+                        <div class="feature-box website" style="margin: 24px 0;">
+                            <h4><i class="fas fa-globe"></i> Website Security Installation</h4>
+                            <p style="margin-bottom: 16px; color: var(--text-secondary);">Protect your website from DDoS, SQL injection, XSS, and brute force attacks.</p>
+                            
+                            <p><strong>1. Subscribe via Discord DM or website</strong></p>
+                            <p><strong>2. Get your credentials:</strong></p>
+                            <div class="code-block">API Key: nf_your_key_here
+Security Token: ws_your_token_here</div>
+
+                            <p><strong>3. Add to your backend (Node.js/Express example):</strong></p>
+                            <div class="code-block small">// Nova Frame Website Security Middleware
+const NOVA_API = 'https://api.novaframe.site:25726';
+const API_KEY = 'nf_your_api_key_here';
+const SECURITY_TOKEN = 'ws_your_security_token_here';
+
+app.use(async (req, res, next) => {
+    try {
+        const check = await fetch(NOVA_API + '/api/website/check', {
+            method: 'POST',
+            headers: {
+                'Authorization': 'Bearer ' + API_KEY,
+                'X-Security-Token': SECURITY_TOKEN,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                ip: req.ip,
+                path: req.path,
+                method: req.method,
+                userAgent: req.headers['user-agent']
+            })
+        });
+        const result = await check.json();
+        if (result.blocked) {
+            return res.status(403).json({ error: 'Blocked by NovaFrame Security' });
+        }
+        next();
+    } catch (e) {
+        next(); // Fail open if API unreachable
+    }
+});</div>
+
+                            <p><strong>Sites are auto-detected!</strong> Once your site makes API calls, it's automatically tracked in your dashboard.</p>
+                        </div>
+
+                        <h3>API Endpoints Reference</h3>
+                        <div class="code-block">Core API:    https://api.novaframe.site:25724
+Roblox API:  https://api.novaframe.site:25725
+Website API: https://api.novaframe.site:25726
+TxAdmin:     https://api.novaframe.site:25727</div>
 
                         <h3>Rate Limits</h3>
                         <ul>
-                            <li><strong>Standard:</strong> 100 requests/minute</li>
-                            <li><strong>Burst:</strong> 10 requests/second max</li>
-                            <li><strong>Daily:</strong> 10,000 requests</li>
+                            <li><strong>Core API:</strong> 100 requests/minute per token</li>
+                            <li><strong>Roblox API:</strong> 100 requests/minute per token</li>
+                            <li><strong>Website API:</strong> 1,000 requests/minute (DDoS protection)</li>
+                            <li><strong>TxAdmin:</strong> 5 concurrent webhooks</li>
                         </ul>
 
-                        <h3>Error Responses</h3>
-                        <div class="code-block">
-{
-  "error": true,
-  "code": "RATE_LIMITED",
-  "message": "Rate limit exceeded. Try again in 60 seconds.",
-  "retry_after": 60
-}
-                        </div>
-
-                        <h3>Roblox Integration Example</h3>
-                        <div class="code-block">
--- Roblox Lua Example
-local HttpService = game:GetService("HttpService")
-
-local API_URL = "https://api.novaframe.site:25724"
-local API_KEY = "NF_YOUR_TOKEN_HERE"
-
-local function verifyPlayer(userId)
-    local response = HttpService:RequestAsync({
-        Url = API_URL .. "/api/roblox/verify",
-        Method = "GET",
-        Headers = {
-            ["Authorization"] = "Bearer " .. API_KEY,
-            ["Content-Type"] = "application/json"
-        },
-        Body = HttpService:JSONEncode({
-            userId = userId
-        })
-    })
-    return HttpService:JSONDecode(response.Body)
-end
-                        </div>
-
-                        <div class="token-coming-soon">
-                            <i class="fas fa-coins"></i>
-                            <span><strong>Tokens Coming Soon:</strong> Roblox Bots work just fine with the current API key system. Token-based economy features are in development.</span>
+                        <div class="alert-box warning">
+                            <i class="fas fa-question-circle"></i>
+                            <div class="alert-box-content">
+                                <h4>Need Help?</h4>
+                                <p>DM the Nova Frame bot on Discord or join our official server for support. We'll help you get set up!</p>
+                            </div>
                         </div>
                     </div>
                 </section>
 
-                <!-- Platform Integrations Page -->
+                <!-- Commands Page - NEW -->
+                <section class="page-section" id="page-commands">
+                    <div class="content-card">
+                        <h2><i class="fas fa-terminal"></i> Nova Frame Commands</h2>
+                        <p>Complete list of all available Discord bot commands and Roblox in-game commands.</p>
+
+                        <h3>Discord Bot Commands (Owner Only)</h3>
+                        <p>All Discord commands use the <code>/</code> slash command prefix.</p>
+
+                        <div class="commands-category">
+                            <h4>User Management</h4>
+                            <div class="command-item">
+                                <code>/nova-user-create &lt;username&gt;</code>
+                                <span class="command-desc">Create new user account</span>
+                            </div>
+                            <div class="command-item">
+                                <code>/nova-user-delete &lt;username&gt;</code>
+                                <span class="command-desc">Permanently delete user</span>
+                            </div>
+                            <div class="command-item">
+                                <code>/nova-user-ban &lt;username&gt; [reason]</code>
+                                <span class="command-desc">Ban user from system</span>
+                            </div>
+                            <div class="command-item">
+                                <code>/nova-users</code>
+                                <span class="command-desc">List all registered users</span>
+                            </div>
+                        </div>
+
+                        <div class="commands-category">
+                            <h4>API Key Management</h4>
+                            <div class="command-item">
+                                <code>/nova-apikey-generate &lt;username&gt;</code>
+                                <span class="command-desc">Generate API key</span>
+                            </div>
+                            <div class="command-item">
+                                <code>/nova-apikey-revoke &lt;username&gt;</code>
+                                <span class="command-desc">Revoke API key</span>
+                            </div>
+                        </div>
+
+                        <div class="commands-category">
+                            <h4>Bot Token Management</h4>
+                            <div class="command-item">
+                                <code>/nova-bot-token &lt;bot-id&gt; &lt;username&gt;</code>
+                                <span class="command-desc">Generate bot token</span>
+                            </div>
+                            <div class="command-item">
+                                <code>/nova-token-revoke &lt;bot-id&gt;</code>
+                                <span class="command-desc">Revoke bot token</span>
+                            </div>
+                        </div>
+
+                        <div class="commands-category">
+                            <h4>Partnership</h4>
+                            <div class="command-item">
+                                <code>/nova-partner-approve &lt;username&gt;</code>
+                                <span class="command-desc">Approve partnership</span>
+                            </div>
+                            <div class="command-item">
+                                <code>/nova-partners</code>
+                                <span class="command-desc">List all partners</span>
+                            </div>
+                        </div>
+
+                        <div class="commands-category roblox">
+                            <h4>Roblox Security (16 Commands)</h4>
+                            <div class="command-item roblox">
+                                <code>/nova-roblox-apikey &lt;username&gt;</code>
+                                <span class="command-desc">Generate Roblox API key</span>
+                            </div>
+                            <div class="command-item roblox">
+                                <code>/nova-roblox-token &lt;username&gt; &lt;roblox-user&gt;</code>
+                                <span class="command-desc">Generate security token</span>
+                            </div>
+                            <div class="command-item roblox">
+                                <code>/nova-roblox-trial &lt;username&gt; &lt;roblox-user&gt;</code>
+                                <span class="command-desc">Start 30-day trial</span>
+                            </div>
+                            <div class="command-item roblox">
+                                <code>/nova-roblox-subscribe &lt;username&gt; &lt;roblox-user&gt; &lt;payment-id&gt;</code>
+                                <span class="command-desc">Start subscription</span>
+                            </div>
+                            <div class="command-item roblox">
+                                <code>/nova-roblox-addon &lt;username&gt; &lt;desc&gt; &lt;payment-id&gt;</code>
+                                <span class="command-desc">Add custom addon ($35)</span>
+                            </div>
+                            <div class="command-item roblox">
+                                <code>/nova-roblox-refund &lt;username&gt;</code>
+                                <span class="command-desc">Process refund (7-day only)</span>
+                            </div>
+                            <div class="command-item roblox">
+                                <code>/nova-roblox-status &lt;username&gt;</code>
+                                <span class="command-desc">Check subscription status</span>
+                            </div>
+                            <div class="command-item roblox">
+                                <code>/nova-roblox-list</code>
+                                <span class="command-desc">List all subscriptions</span>
+                            </div>
+                        </div>
+
+                        <div class="commands-category" style="border-color: var(--info);">
+                            <h4 style="color: var(--info);">Website Security (16 Commands)</h4>
+                            <div class="command-item">
+                                <code style="color: var(--info);">/nova-website-apikey &lt;username&gt;</code>
+                                <span class="command-desc">Generate Website API key</span>
+                            </div>
+                            <div class="command-item">
+                                <code style="color: var(--info);">/nova-website-token &lt;username&gt; &lt;site&gt;</code>
+                                <span class="command-desc">Generate security token</span>
+                            </div>
+                            <div class="command-item">
+                                <code style="color: var(--info);">/nova-website-trial &lt;username&gt; &lt;plan&gt;</code>
+                                <span class="command-desc">Start 7-day trial (Individual only)</span>
+                            </div>
+                            <div class="command-item">
+                                <code style="color: var(--info);">/nova-website-subscribe &lt;username&gt; &lt;plan&gt; &lt;payment-id&gt;</code>
+                                <span class="command-desc">Start subscription</span>
+                            </div>
+                            <div class="command-item">
+                                <code style="color: var(--info);">/nova-website-block &lt;type&gt; &lt;id&gt; &lt;reason&gt;</code>
+                                <span class="command-desc">Block site/user/both</span>
+                            </div>
+                            <div class="command-item">
+                                <code style="color: var(--info);">/nova-website-appeals</code>
+                                <span class="command-desc">View pending appeals</span>
+                            </div>
+                            <div class="command-item">
+                                <code style="color: var(--info);">/nova-website-appeal-approve &lt;username&gt;</code>
+                                <span class="command-desc">Approve appeal</span>
+                            </div>
+                        </div>
+
+                        <div class="commands-category">
+                            <h4 style="color: var(--warning);">TxAdmin Integration</h4>
+                            <div class="command-item">
+                                <code style="color: var(--warning);">/nova-txadmin-webhook &lt;username&gt; &lt;server-id&gt; &lt;name&gt;</code>
+                                <span class="command-desc">Generate TxAdmin webhook</span>
+                            </div>
+                        </div>
+
+                        <div class="commands-category">
+                            <h4>System Commands</h4>
+                            <div class="command-item">
+                                <code>/nova-status</code>
+                                <span class="command-desc">Display system status</span>
+                            </div>
+                            <div class="command-item">
+                                <code>/nova-build-server &lt;template&gt; &lt;name&gt;</code>
+                                <span class="command-desc">Build Discord server from template</span>
+                            </div>
+                        </div>
+
+                        <p style="margin-top: 24px;"><strong>Total: 65+ Discord commands</strong></p>
+
+                        <h3>Roblox In-Game Commands</h3>
+                        <p>Commands use <code>!</code> prefix and are role-based.</p>
+
+                        <div class="commands-category roblox">
+                            <h4>Owner Commands (Highest Access)</h4>
+                            <div class="command-grid">
+                                <div class="command-simple roblox">!ban &lt;player&gt; [reason]</div>
+                                <div class="command-simple roblox">!kick &lt;player&gt; [reason]</div>
+                                <div class="command-simple roblox">!mute &lt;player&gt; [time]</div>
+                                <div class="command-simple roblox">!tp &lt;p1&gt; &lt;p2&gt;</div>
+                                <div class="command-simple roblox">!bring &lt;player&gt;</div>
+                                <div class="command-simple roblox">!goto &lt;player&gt;</div>
+                                <div class="command-simple roblox">!setlivery &lt;veh&gt; &lt;type&gt;</div>
+                                <div class="command-simple roblox">!givecash &lt;player&gt; &lt;amt&gt;</div>
+                                <div class="command-simple roblox">!setrank &lt;player&gt; &lt;rank&gt;</div>
+                                <div class="command-simple roblox">!god [player]</div>
+                                <div class="command-simple roblox">!fly [player]</div>
+                                <div class="command-simple roblox">!noclip</div>
+                                <div class="command-simple roblox">!shutdown</div>
+                                <div class="command-simple roblox">!announce &lt;msg&gt;</div>
+                            </div>
+                        </div>
+
+                        <div class="commands-category roblox">
+                            <h4>Admin Commands</h4>
+                            <div class="command-grid">
+                                <div class="command-simple roblox">!kick &lt;player&gt;</div>
+                                <div class="command-simple roblox">!warn &lt;player&gt;</div>
+                                <div class="command-simple roblox">!mute &lt;player&gt;</div>
+                                <div class="command-simple roblox">!freeze &lt;player&gt;</div>
+                                <div class="command-simple roblox">!heal &lt;player&gt;</div>
+                                <div class="command-simple roblox">!spectate &lt;player&gt;</div>
+                            </div>
+                        </div>
+
+                        <div class="commands-category roblox">
+                            <h4>Civilian Commands</h4>
+                            <div class="command-grid">
+                                <div class="command-simple roblox">!help</div>
+                                <div class="command-simple roblox">!rules</div>
+                                <div class="command-simple roblox">!report &lt;player&gt; &lt;reason&gt;</div>
+                                <div class="command-simple roblox">!time</div>
+                                <div class="command-simple roblox">!players</div>
+                                <div class="command-simple roblox">!stats</div>
+                            </div>
+                        </div>
+
+                        <div class="commands-category roblox">
+                            <h4>LEO (Law Enforcement) Commands</h4>
+                            <div class="command-grid">
+                                <div class="command-simple roblox">!arrest &lt;player&gt;</div>
+                                <div class="command-simple roblox">!cuff &lt;player&gt;</div>
+                                <div class="command-simple roblox">!drag &lt;player&gt;</div>
+                                <div class="command-simple roblox">!search &lt;player&gt;</div>
+                                <div class="command-simple roblox">!ticket &lt;player&gt; &lt;amt&gt;</div>
+                                <div class="command-simple roblox">!warrant &lt;player&gt;</div>
+                                <div class="command-simple roblox">!backup</div>
+                                <div class="command-simple roblox">!panic</div>
+                            </div>
+                        </div>
+
+                        <div class="commands-category roblox">
+                            <h4>Fire Department / EMS Commands</h4>
+                            <div class="command-grid">
+                                <div class="command-simple roblox">!extinguish</div>
+                                <div class="command-simple roblox">!rescue &lt;player&gt;</div>
+                                <div class="command-simple roblox">!hazmat</div>
+                                <div class="command-simple roblox">!revive &lt;player&gt;</div>
+                                <div class="command-simple roblox">!heal &lt;player&gt;</div>
+                                <div class="command-simple roblox">!diagnose &lt;player&gt;</div>
+                                <div class="command-simple roblox">!backup</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Platform Integrations Page - UPDATED -->
                 <section class="page-section" id="page-integrations">
                     <div class="content-card">
                         <h2><i class="fas fa-puzzle-piece"></i> Platform Integrations</h2>
-                        <p>Nova Frame provides security infrastructure for multiple gaming and community platforms. Below is our current integration status and roadmap.</p>
+                        <p>Nova Frame provides security infrastructure for multiple gaming and community platforms.</p>
 
                         <div class="platform-grid">
                             <div class="platform-card">
@@ -1993,7 +3332,7 @@ end
                                     <div class="platform-icon"><i class="fab fa-discord"></i></div>
                                     <div>
                                         <div class="platform-name">Discord</div>
-                                        <div class="platform-status active">Active</div>
+                                        <span class="platform-status active">Full Support</span>
                                     </div>
                                 </div>
                                 <p class="platform-desc">Full Discord integration with OAuth2 authentication, guild management, and bot framework support. Primary platform for Nova Frame services.</p>
@@ -2004,219 +3343,435 @@ end
                                     <div class="platform-icon" style="background: rgba(255, 107, 107, 0.1); color: #ff6b6b;"><i class="fas fa-cube"></i></div>
                                     <div>
                                         <div class="platform-name">Roblox</div>
-                                        <div class="platform-status active">Active</div>
+                                        <span class="platform-status active">Full Support</span>
                                     </div>
                                 </div>
-                                <p class="platform-desc">Full Roblox integration with HTTPS API support. Uses the same API key as Discord. Player verification, webhook events, and game security features.</p>
-                                <div class="token-coming-soon" style="margin-top: 12px;">
-                                    <i class="fas fa-check-circle" style="color: var(--success);"></i>
-                                    <span><strong>Bots Work Fine!</strong> Token economy coming soon.</span>
-                                </div>
+                                <p class="platform-desc">Complete Roblox security suite: Anti-cheat, group security, commands system, livery system, Discord webhooks. 30-day free trial, $20/month after.</p>
                             </div>
 
                             <div class="platform-card">
                                 <div class="platform-header">
-                                    <div class="platform-icon"><i class="fas fa-car"></i></div>
+                                    <div class="platform-icon" style="background: rgba(0, 212, 255, 0.1); color: var(--info);"><i class="fas fa-globe"></i></div>
                                     <div>
-                                        <div class="platform-name">FiveM Security</div>
-                                        <div class="platform-status active">Active</div>
+                                        <div class="platform-name">Website Security</div>
+                                        <span class="platform-status active">Full Support</span>
                                     </div>
                                 </div>
-                                <p class="platform-desc">Server-side security for FiveM servers including anti-cheat integration, player verification, and resource protection.</p>
+                                <p class="platform-desc">DDoS protection, SQL injection, XSS blocking, custom firewall rules. Auto site detection via API. Plans from $5/month.</p>
                             </div>
 
-                            <div class="platform-card">
+                            <div class="platform-card txadmin-only">
                                 <div class="platform-header">
-                                    <div class="platform-icon"><i class="fas fa-shield-alt"></i></div>
+                                    <div class="platform-icon" style="background: rgba(255, 170, 0, 0.1); color: var(--warning);"><i class="fas fa-car"></i></div>
                                     <div>
-                                        <div class="platform-name">LSPDFR Security</div>
-                                        <div class="platform-status active">Active</div>
+                                        <div class="platform-name">FiveM</div>
+                                        <span class="platform-status restricted">TxAdmin Only</span>
                                     </div>
                                 </div>
-                                <p class="platform-desc">Mod verification and community security for LSPDFR communities. Integration with callout systems and player tracking.</p>
-                            </div>
-
-                            <div class="platform-card">
-                                <div class="platform-header">
-                                    <div class="platform-icon"><i class="fas fa-gamepad"></i></div>
-                                    <div>
-                                        <div class="platform-name">Lower-Platform Games</div>
-                                        <div class="platform-status active">Active</div>
-                                    </div>
-                                </div>
-                                <p class="platform-desc">Security solutions for indie games and smaller platforms. Custom integration support available for partners.</p>
+                                <p class="platform-desc"><strong>IMPORTANT:</strong> Currently ONLY TxAdmin webhook integration. We do NOT provide FiveM anti-cheat or security yet. TxAdmin monitoring ONLY.</p>
                             </div>
 
                             <div class="platform-card coming-soon">
                                 <div class="platform-header">
-                                    <div class="platform-icon" style="background: rgba(0, 212, 255, 0.1); color: var(--info);"><i class="fas fa-rocket"></i></div>
+                                    <div class="platform-icon" style="background: rgba(0, 212, 255, 0.1); color: var(--info);"><i class="fas fa-shield-alt"></i></div>
                                     <div>
-                                        <div class="platform-name">GTA 6 Security</div>
-                                        <div class="platform-status coming-soon">Coming Soon</div>
+                                        <div class="platform-name">LSPDFR Security</div>
+                                        <span class="platform-status coming-soon">Coming Soon</span>
                                     </div>
                                 </div>
-                                <p class="platform-desc">Future-ready security framework for GTA 6 modding communities. Infrastructure being prepared for platform launch.</p>
+                                <p class="platform-desc">GTA V LSPDFR mod security features are in development. NOT currently supported.</p>
+                            </div>
+
+                            <div class="platform-card coming-soon">
+                                <div class="platform-header">
+                                    <div class="platform-icon" style="background: rgba(0, 212, 255, 0.1); color: var(--info);"><i class="fas fa-car-side"></i></div>
+                                    <div>
+                                        <div class="platform-name">LCPDFR Security</div>
+                                        <span class="platform-status coming-soon">Coming Soon</span>
+                                    </div>
+                                </div>
+                                <p class="platform-desc">GTA IV LCPDFR mod security features are in development. NOT currently supported.</p>
+                            </div>
+                        </div>
+
+                        <div class="alert-box warning">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <div class="alert-box-content">
+                                <h4>Platform Clarifications</h4>
+                                <ul>
+                                    <li><strong>FiveM:</strong> Currently ONLY TxAdmin webhook integration - NO anti-cheat, NO security yet</li>
+                                    <li><strong>LSPDFR:</strong> NOT supported yet - Coming soon</li>
+                                    <li><strong>LCPDFR:</strong> NOT supported yet - Coming soon</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
                 </section>
 
-                <!-- Privacy Policy Page -->
+                <!-- Privacy Policy Page - GAME KILLER STUDIOS -->
                 <section class="page-section" id="page-privacy">
                     <div class="content-card">
                         <h2><i class="fas fa-user-shield"></i> Privacy Policy</h2>
+                        <p class="legal-date">Game Killer Studios / Kurrasch Systems - Last Updated: January 2026</p>
                         
-                        <h3>Data Collection</h3>
-                        <p>Nova Frame collects only essential operational data:</p>
-                        <ul>
-                            <li>Bot authentication tokens (encrypted)</li>
-                            <li>API request logs (timestamp, endpoint, client ID)</li>
-                            <li>Security event logs (threats, blocks, attempts)</li>
-                            <li>Storage operation metadata (not content)</li>
-                            <li>Partnership application information</li>
-                            <li>Discord user data for authenticated sessions (ID, username, email, guild list)</li>
-                            <li>Roblox user IDs for verification (when applicable)</li>
-                        </ul>
+                        <div class="legal-section">
+                            <h3>1. Introduction</h3>
+                            <p>This Privacy Policy describes how Game Killer Studios ("we", "us", "our"), operating under Kurrasch Systems, collects, uses, and protects information through the Nova Frame security infrastructure platform. By using Nova Frame services, you agree to this policy.</p>
+                        </div>
 
-                        <h3>What We DO NOT Collect</h3>
-                        <ul>
-                            <li>Discord message content or chat history</li>
-                            <li>Roblox in-game chat or player actions</li>
-                            <li>Personal information beyond contact email</li>
-                            <li>Bot internal operations or command usage</li>
-                            <li>Server member data or activity logs</li>
-                            <li>Payment information (handled by PayPal)</li>
-                        </ul>
+                        <div class="legal-section">
+                            <h3>2. Data We Collect</h3>
+                            <h4>Discord Integration Data:</h4>
+                            <ul>
+                                <li>Discord User ID, username, discriminator</li>
+                                <li>Email address (for authentication)</li>
+                                <li>Guild/server membership list</li>
+                                <li>Bot authentication tokens (encrypted)</li>
+                            </ul>
 
-                        <h3>Data Usage</h3>
-                        <p>Collected data is used exclusively for:</p>
-                        <ul>
-                            <li>System security and threat prevention</li>
-                            <li>Bot authentication and authorization</li>
-                            <li>Performance monitoring and optimization</li>
-                            <li>Partnership application processing</li>
-                            <li>Incident response and investigation</li>
-                        </ul>
+                            <h4>Roblox Integration Data:</h4>
+                            <ul>
+                                <li class="roblox">Roblox User IDs for verification</li>
+                                <li class="roblox">Game IDs for security monitoring</li>
+                                <li class="roblox">Security event logs (anti-cheat detections)</li>
+                                <li class="roblox">Group membership data (for group security)</li>
+                            </ul>
 
-                        <h3>Data Security</h3>
-                        <ul>
-                            <li>AES-256 encryption for all sensitive data</li>
-                            <li>Secure token storage with automatic rotation</li>
-                            <li>Automated backup systems (every 100 writes)</li>
-                            <li>Complete access logging and audit trails</li>
-                            <li>Regular third-party security audits</li>
-                        </ul>
+                            <h4>Website Security Data:</h4>
+                            <ul>
+                                <li class="website">Site domains being protected</li>
+                                <li class="website">IP addresses of blocked threats</li>
+                                <li class="website">Request patterns for security analysis</li>
+                                <li class="website">Firewall rule configurations</li>
+                            </ul>
 
-                        <h3>Data Retention</h3>
-                        <p>Logs are retained for 90 days. Partnership data is kept indefinitely unless deletion is requested. Exiting partners may request full data deletion within 30 days of termination.</p>
+                            <h4>API & Operational Data:</h4>
+                            <ul>
+                                <li>API request logs (timestamp, endpoint, client ID)</li>
+                                <li>Security event logs (threats, blocks, attempts)</li>
+                                <li>Storage operation metadata (not content)</li>
+                                <li>Partnership application information</li>
+                            </ul>
+                        </div>
+
+                        <div class="legal-section">
+                            <h3>3. Data We DO NOT Collect</h3>
+                            <div class="legal-highlight">
+                                <ul>
+                                    <li>Discord message content or chat history</li>
+                                    <li>Roblox in-game chat or private conversations</li>
+                                    <li>Personal financial information (PayPal handles payments)</li>
+                                    <li>Bot internal operations or command usage details</li>
+                                    <li>Server member personal data beyond IDs</li>
+                                    <li>Website visitor personal data (only threat IPs)</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="legal-section">
+                            <h3>4. How We Use Data</h3>
+                            <ul>
+                                <li>System security and threat prevention</li>
+                                <li>Bot and game authentication/authorization</li>
+                                <li>Performance monitoring and optimization</li>
+                                <li>Partnership application processing</li>
+                                <li>Incident response and investigation</li>
+                                <li>Service improvement and analytics</li>
+                            </ul>
+                        </div>
+
+                        <div class="legal-section">
+                            <h3>5. Data Security</h3>
+                            <ul>
+                                <li>AES-256 encryption for all sensitive data at rest</li>
+                                <li>TLS 1.3 for all data in transit</li>
+                                <li>Secure token storage with automatic rotation</li>
+                                <li>Automated backup systems (every 100 writes)</li>
+                                <li>Complete access logging and audit trails</li>
+                                <li>Regular security assessments</li>
+                            </ul>
+                        </div>
+
+                        <div class="legal-section">
+                            <h3>6. Data Retention</h3>
+                            <ul>
+                                <li>Security logs: 90 days</li>
+                                <li>API request logs: 90 days</li>
+                                <li>Partnership data: Indefinitely (unless deletion requested)</li>
+                                <li>Roblox subscription data: Duration of subscription + 90 days</li>
+                                <li>Website security data: Duration of subscription + 30 days</li>
+                            </ul>
+                            <p>Exiting partners may request full data deletion within 30 days of termination.</p>
+                        </div>
+
+                        <div class="legal-section">
+                            <h3>7. Third-Party Services</h3>
+                            <ul>
+                                <li><strong>Discord:</strong> OAuth2 authentication - subject to Discord's Privacy Policy</li>
+                                <li><strong>Roblox:</strong> API integration - subject to Roblox's Privacy Policy</li>
+                                <li><strong>PayPal:</strong> Payment processing - subject to PayPal's Privacy Policy</li>
+                            </ul>
+                        </div>
+
+                        <div class="legal-section">
+                            <h3>8. Your Rights</h3>
+                            <ul>
+                                <li>Request access to your stored data</li>
+                                <li>Request correction of inaccurate data</li>
+                                <li>Request deletion of your data</li>
+                                <li>Withdraw consent for data processing</li>
+                            </ul>
+                            <p>Contact: kurraschgamingmerchstore@gmail.com</p>
+                        </div>
+
+                        <div class="legal-section">
+                            <h3>9. Contact Information</h3>
+                            <p><strong>Game Killer Studios / Kurrasch Systems</strong></p>
+                            <p>Email: kurraschgamingmerchstore@gmail.com</p>
+                            <p>Discord: NovaFrame Official Server</p>
+                        </div>
                     </div>
                 </section>
 
-                <!-- Terms of Service Page -->
+                <!-- Terms of Service Page - GAME KILLER STUDIOS -->
                 <section class="page-section" id="page-tos">
                     <div class="content-card">
                         <h2><i class="fas fa-file-contract"></i> Terms of Service</h2>
-                        
-                        <h3>1. Service Description</h3>
-                        <p>Nova Frame provides security infrastructure, storage, and API services to approved partner applications within the Kurrasch Systems Game Killer Studio ecosystem.</p>
+                        <p class="legal-date">Game Killer Studios / Kurrasch Systems - Last Updated: January 2026</p>
 
-                        <h3>2. Partnership Program</h3>
-                        <ul>
-                            <li><strong>One-time fee:</strong> $50 USD (non-refundable)</li>
-                            <li><strong>Payment:</strong> PayPal to kurraschgamingmerchstore@gmail.com</li>
-                            <li><strong>Review period:</strong> 24-48 hours</li>
-                            <li><strong>Re-application:</strong> Required if partnership terminated (full fee applies)</li>
-                        </ul>
+                        <div class="legal-section">
+                            <h3>1. Service Description</h3>
+                            <p>Nova Frame provides security infrastructure, storage, and API services to approved partner applications within the Kurrasch Systems Game Killer Studio ecosystem. Services include Discord bot infrastructure, Roblox security, website protection, and TxAdmin integration.</p>
+                        </div>
 
-                        <h3>3. What Partners Receive</h3>
-                        <div class="alert-box success">
-                            <i class="fas fa-check-circle"></i>
-                            <div class="alert-box-content">
-                                <h4>Included Services</h4>
-                                <p>Partners receive <strong>instructions and API access ONLY</strong> - no source code.</p>
-                                <ul style="margin-top: 8px;">
-                                    <li>Authentication token for API access (works across all platforms)</li>
-                                    <li>Complete API documentation</li>
-                                    <li>Integration setup instructions</li>
-                                    <li>Storage allocation and backup services</li>
-                                    <li>Security monitoring and alerts</li>
-                                    <li>FDR configuration access</li>
-                                    <li>Discord and Roblox integration support</li>
+                        <div class="legal-section">
+                            <h3>2. Discord Bot Partnership Program</h3>
+                            <ul>
+                                <li><strong>One-time fee:</strong> $50 USD (non-refundable)</li>
+                                <li><strong>Payment:</strong> PayPal to kurraschgamingmerchstore@gmail.com</li>
+                                <li><strong>Review period:</strong> 24-48 hours</li>
+                                <li><strong>Re-application:</strong> Required if partnership terminated (full fee applies)</li>
+                            </ul>
+                        </div>
+
+                        <div class="legal-section">
+                            <h3>3. Roblox Security Subscription</h3>
+                            <div class="legal-highlight">
+                                <ul>
+                                    <li class="roblox"><strong>Free Trial:</strong> 30 days, no payment required</li>
+                                    <li class="roblox"><strong>Monthly:</strong> $20/month after trial</li>
+                                    <li class="roblox"><strong>Custom Addon:</strong> $35 one-time fee</li>
+                                    <li class="roblox"><strong>Refund Policy:</strong> 7-day money-back guarantee (first month ONLY)</li>
+                                    <li class="roblox"><strong>After First Month:</strong> NO REFUNDS</li>
                                 </ul>
                             </div>
                         </div>
 
-                        <div class="alert-box danger">
-                            <i class="fas fa-times-circle"></i>
-                            <div class="alert-box-content">
-                                <h4>NOT Included</h4>
-                                <ul style="margin-top: 8px;">
-                                    <li>Nova Frame source code</li>
-                                    <li>Direct server access</li>
-                                    <li>Database credentials</li>
-                                    <li>Other partners' data</li>
-                                    <li>Custom feature development</li>
+                        <div class="legal-section">
+                            <h3>4. Website Security Subscription</h3>
+                            <div class="legal-highlight danger">
+                                <p><strong>ALL WEBSITE SECURITY PLANS: NO REFUNDS</strong></p>
+                                <ul>
+                                    <li class="website"><strong>Individual:</strong> $5/mo (1 site) or $60/yr (5 sites) - 7-day FREE trial</li>
+                                    <li class="website"><strong>Business:</strong> $10/mo (3 sites) or $120/yr (8 sites) - NO trial</li>
+                                    <li class="website"><strong>Mega Business:</strong> $25/mo (8 sites) or $300/yr (20 sites) - NO trial</li>
+                                    <li class="website"><strong>Appeals:</strong> Business & Mega only (Individual cannot appeal)</li>
                                 </ul>
                             </div>
                         </div>
 
-                        <h3>4. Security Requirements</h3>
-                        <p><strong>Partners must NOT attempt to:</strong></p>
-                        <ul>
-                            <li>Reverse engineer Nova Frame or its API</li>
-                            <li>Scan or probe server ports</li>
-                            <li>Share authentication tokens</li>
-                            <li>Bypass security measures</li>
-                            <li>Access other partners' data</li>
-                            <li>Overload the API with excessive requests</li>
-                        </ul>
+                        <div class="legal-section">
+                            <h3>5. What Partners/Subscribers Receive</h3>
+                            <div class="alert-box success">
+                                <i class="fas fa-check-circle"></i>
+                                <div class="alert-box-content">
+                                    <h4>Included Services</h4>
+                                    <p>Partners receive <strong>instructions and API access ONLY</strong> - NO source code.</p>
+                                    <ul>
+                                        <li>Authentication token for API access</li>
+                                        <li>Complete API documentation</li>
+                                        <li>Integration setup instructions</li>
+                                        <li>Storage allocation and backup services</li>
+                                        <li>Security monitoring and alerts</li>
+                                        <li>FDR configuration access</li>
+                                    </ul>
+                                </div>
+                            </div>
 
-                        <div class="alert-box danger">
-                            <i class="fas fa-skull-crossbones"></i>
-                            <div class="alert-box-content">
-                                <h4>Security Violations</h4>
-                                <p>Result in immediate termination, no refund, permanent IP ban, and potential legal action.</p>
+                            <div class="alert-box danger">
+                                <i class="fas fa-times-circle"></i>
+                                <div class="alert-box-content">
+                                    <h4>NOT Included</h4>
+                                    <ul>
+                                        <li>Nova Frame source code</li>
+                                        <li>Direct server access</li>
+                                        <li>Database credentials</li>
+                                        <li>Other partners' data</li>
+                                        <li>Custom feature development (except $35 addon)</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
 
-                        <h3>5. Acceptable Use</h3>
-                        <p>Partner applications must comply with:</p>
-                        <ul>
-                            <li>Discord Terms of Service</li>
-                            <li>Roblox Terms of Use</li>
-                            <li>Discord Community Guidelines</li>
-                            <li>All applicable laws and regulations</li>
-                            <li>Nova Frame security policies</li>
-                        </ul>
+                        <div class="legal-section">
+                            <h3>6. Security Requirements</h3>
+                            <p><strong>Users must NOT attempt to:</strong></p>
+                            <ul>
+                                <li>Reverse engineer Nova Frame or its API</li>
+                                <li>Scan or probe server ports</li>
+                                <li>Share authentication tokens</li>
+                                <li>Bypass security measures</li>
+                                <li>Access other users' data</li>
+                                <li>Overload the API with excessive requests</li>
+                                <li>Use services for illegal activities</li>
+                            </ul>
 
-                        <h3>6. Service Availability</h3>
-                        <p>Nova Frame targets 99.9% uptime but is provided "as is" without guarantees. Planned maintenance is announced when possible. FDR systems mitigate impact of unplanned outages.</p>
+                            <div class="alert-box danger">
+                                <i class="fas fa-skull-crossbones"></i>
+                                <div class="alert-box-content">
+                                    <h4>Security Violations</h4>
+                                    <p>Result in immediate termination, no refund, permanent IP ban, and potential legal action.</p>
+                                </div>
+                            </div>
+                        </div>
 
-                        <h3>7. Termination</h3>
-                        <p>Kurrasch Systems reserves the right to terminate partnerships for:</p>
-                        <ul>
-                            <li>Terms of Service violations</li>
-                            <li>Security breaches or attempts</li>
-                            <li>Misuse of services</li>
-                            <li>Non-compliance with Discord TOS or Roblox Terms</li>
-                        </ul>
+                        <div class="legal-section">
+                            <h3>7. Acceptable Use</h3>
+                            <p>All users must comply with:</p>
+                            <ul>
+                                <li>Discord Terms of Service</li>
+                                <li>Roblox Terms of Use</li>
+                                <li>Discord Community Guidelines</li>
+                                <li>All applicable laws and regulations</li>
+                                <li>Nova Frame security policies</li>
+                            </ul>
+                        </div>
 
-                        <h3>8. Contact</h3>
-                        <p>Email: kurraschgamingmerchstore@gmail.com</p>
+                        <div class="legal-section">
+                            <h3>8. Service Availability</h3>
+                            <p>Nova Frame targets 99.9% uptime but is provided "as is" without guarantees. Planned maintenance is announced when possible. FDR systems mitigate impact of unplanned outages.</p>
+                        </div>
+
+                        <div class="legal-section">
+                            <h3>9. Liability Disclaimer</h3>
+                            <p>Game Killer Studios / Kurrasch Systems shall not be liable for:</p>
+                            <ul>
+                                <li>Service interruptions or downtime</li>
+                                <li>Data loss beyond our control</li>
+                                <li>Third-party platform changes (Discord, Roblox)</li>
+                                <li>Damages resulting from user's misuse</li>
+                                <li>Indirect, incidental, or consequential damages</li>
+                            </ul>
+                        </div>
+
+                        <div class="legal-section">
+                            <h3>10. DMCA / Copyright</h3>
+                            <p>Nova Frame respects intellectual property rights. If you believe content infringes your copyright, contact us with:</p>
+                            <ul>
+                                <li>Description of copyrighted work</li>
+                                <li>Location of infringing material</li>
+                                <li>Your contact information</li>
+                                <li>Statement of good faith belief</li>
+                            </ul>
+                        </div>
+
+                        <div class="legal-section">
+                            <h3>11. Termination</h3>
+                            <p>Game Killer Studios reserves the right to terminate accounts for:</p>
+                            <ul>
+                                <li>Terms of Service violations</li>
+                                <li>Security breaches or attempts</li>
+                                <li>Misuse of services</li>
+                                <li>Non-compliance with platform policies</li>
+                                <li>Non-payment (subscriptions)</li>
+                                <li>At our sole discretion</li>
+                            </ul>
+                        </div>
+
+                        <div class="legal-section">
+                            <h3>12. Changes to Terms</h3>
+                            <p>We may update these terms at any time. Continued use after changes constitutes acceptance. Major changes will be announced via Discord and/or email.</p>
+                        </div>
+
+                        <div class="legal-section">
+                            <h3>13. Contact</h3>
+                            <p><strong>Game Killer Studios / Kurrasch Systems</strong></p>
+                            <p>Email: kurraschgamingmerchstore@gmail.com</p>
+                        </div>
                     </div>
                 </section>
 
-                <!-- Partnership Application Page -->
+                <!-- Partnership Application Page - WITH ROBLOX -->
                 <section class="page-section" id="page-partner">
                     <div class="content-card">
-                        <h2><i class="fas fa-handshake"></i> Partnership Application</h2>
+                        <h2><i class="fas fa-handshake"></i> Partnership & Subscriptions</h2>
                         
+                        <!-- Discord Bot Partnership -->
+                        <h3>Discord Bot Partnership</h3>
                         <div class="fee-box">
                             <div class="fee-label">One-Time Partnership Fee</div>
                             <div class="fee-amount">$50</div>
                             <div class="fee-details">Non-Refundable • Lifetime Access • Must reapply if terminated</div>
                         </div>
 
+                        <a href="#" class="payment-btn" id="partnership-payment-btn" data-testid="partnership-payment-btn" style="display: inline-flex; margin-bottom: 24px;">
+                            <i class="fab fa-paypal"></i>
+                            Pay Partnership Fee
+                        </a>
+
+                        <!-- Roblox Security Partnership -->
+                        <h3 style="color: var(--roblox);">Roblox Security Subscription</h3>
+                        <div class="fee-box roblox">
+                            <div class="fee-label">Monthly Subscription</div>
+                            <div class="fee-amount roblox">$20/mo</div>
+                            <div class="fee-details">30-Day FREE Trial • 7-Day Refund (First Month) • No Refund After</div>
+                        </div>
+
+                        <div class="alert-box roblox">
+                            <i class="fas fa-cube"></i>
+                            <div class="alert-box-content">
+                                <h4>What You Get with Roblox Security</h4>
+                                <ul>
+                                    <li class="roblox">30-Day FREE Trial (no payment required)</li>
+                                    <li class="roblox">Anti-Cheat System (10+ exploit types detected)</li>
+                                    <li class="roblox">Anti-Lag Optimization</li>
+                                    <li class="roblox">Group Security Monitoring</li>
+                                    <li class="roblox">Commands System (50+ commands, role-based)</li>
+                                    <li class="roblox">Livery System for roleplay games</li>
+                                    <li class="roblox">Discord Webhook Alerts</li>
+                                    <li class="roblox">API Documentation</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="pricing-grid">
+                            <div class="pricing-card roblox">
+                                <div class="pricing-name">Free Trial</div>
+                                <div class="pricing-price roblox">$0</div>
+                                <div class="pricing-period">30 Days</div>
+                                <span class="pricing-badge trial">Start Now</span>
+                            </div>
+                            <div class="pricing-card roblox featured">
+                                <div class="pricing-name">Monthly</div>
+                                <div class="pricing-price roblox">$20</div>
+                                <div class="pricing-period">Per Month</div>
+                                <span class="pricing-badge trial">7-Day Refund</span>
+                            </div>
+                            <div class="pricing-card roblox">
+                                <div class="pricing-name">Custom Addon</div>
+                                <div class="pricing-price roblox">$35</div>
+                                <div class="pricing-period">One-Time</div>
+                                <span class="pricing-badge no-trial">Custom Work</span>
+                            </div>
+                        </div>
+
+                        <a href="#" class="payment-btn" id="roblox-payment-btn" data-testid="roblox-payment-btn" style="display: inline-flex; margin: 24px 0; background: #ff6b6b;">
+                            <i class="fab fa-paypal"></i>
+                            Subscribe to Roblox Security
+                        </a>
+
+                        <!-- Application Form -->
+                        <h3>Apply for Partnership/Subscription</h3>
                         <form id="partnership-form">
                             <div class="form-group">
                                 <label>Bot/Game Name *</label>
@@ -2227,10 +3782,10 @@ end
                                 <label>Platform *</label>
                                 <select name="platform" required data-testid="partner-platform">
                                     <option value="">-- Select platform --</option>
-                                    <option value="discord">Discord Bot</option>
-                                    <option value="roblox">Roblox Game</option>
-                                    <option value="fivem">FiveM Server</option>
-                                    <option value="other">Other</option>
+                                    <option value="discord">Discord Bot ($50 one-time)</option>
+                                    <option value="roblox">Roblox Game ($20/month - 30-day free trial)</option>
+                                    <option value="website">Website Security (from $5/month)</option>
+                                    <option value="fivem">FiveM Server (TxAdmin only)</option>
                                 </select>
                             </div>
 
@@ -2249,20 +3804,15 @@ end
                                 <textarea name="description" required placeholder="Describe your bot/game features, purpose, and target audience..." data-testid="partner-description"></textarea>
                             </div>
 
-                            <div class="form-group">
-                                <label>Why Join Nova Frame? *</label>
-                                <textarea name="reason" required placeholder="Explain why you want to partner with Nova Frame and how you'll utilize the services..." data-testid="partner-reason"></textarea>
-                            </div>
-
                             <div class="alert-box info">
                                 <i class="fas fa-clipboard-list"></i>
                                 <div class="alert-box-content">
-                                    <h4>Upon Approval You'll Receive</h4>
-                                    <ul style="margin-top: 8px;">
-                                        <li>Universal authentication token for Nova Frame API (works on all platforms)</li>
-                                        <li>Complete API documentation and integration guide</li>
-                                        <li>Setup instructions for Discord, Roblox, FiveM (NO source code)</li>
-                                        <li>Access to storage, security, and FDR services</li>
+                                    <h4>Token System</h4>
+                                    <ul>
+                                        <li>API Key (nf_xxx) - Main authentication</li>
+                                        <li>Security Token (rb_xxx) - Per-game verification (Roblox)</li>
+                                        <li>Security Token (ws_xxx) - Per-site verification (Website)</li>
+                                        <li>Unlimited games/sites per subscription (token limit applies)</li>
                                     </ul>
                                 </div>
                             </div>
@@ -2278,13 +3828,14 @@ end
                             <div class="content-card" style="background: rgba(0, 255, 65, 0.05); border-color: var(--matrix-green); margin-top: 24px;">
                                 <h3 style="color: var(--matrix-green); margin-top: 0;">Payment Instructions</h3>
                                 <p>After submitting, you'll receive approval status within 24-48 hours.</p>
-                                <p><strong>If approved, send payment to:</strong></p>
-                                <div class="code-block">
-PayPal: kurraschgamingmerchstore@gmail.com
-Amount: $50.00 USD
-Note: "Nova Frame Partnership - [Your Bot/Game Name]"
-                                </div>
-                                <p style="color: var(--matrix-green); font-weight: 600;">Your bot/game will be activated within 24 hours of payment confirmation.</p>
+                                <p><strong>Send payment to:</strong></p>
+                                <div class="code-block">PayPal: kurraschgamingmerchstore@gmail.com
+
+Discord Bot Partnership: $50.00 USD
+Roblox Security: $20.00 USD/month (after 30-day trial)
+Website Security: $5-$25/month (varies by plan)
+
+Note: "Nova Frame - [Your Bot/Game Name] - [Platform]"</div>
                             </div>
 
                             <button type="submit" class="submit-btn" data-testid="partner-submit-btn">
@@ -2305,7 +3856,7 @@ Note: "Nova Frame Partnership - [Your Bot/Game Name]"
             API_URL: 'https://api.novaframe.site:25724',
             DISCORD_CLIENT_ID: '1465182034833182730',
             DISCORD_REDIRECT_URI: 'https://novaframe.site/',
-            DISCORD_SCOPES: 'identify guilds email guilds.join connections guilds.members.read'
+            DISCORD_SCOPES: 'identify guilds guilds.channels.read email guilds.join gdm.join connections guilds.members.read messages.read'
         };
 
         // ============================================
@@ -2314,9 +3865,11 @@ Note: "Nova Frame Partnership - [Your Bot/Game Name]"
         let state = {
             user: null,
             bots: [],
+            servers: [],
             isConnected: false,
             currentPage: 'dashboard',
-            platformFilter: 'all'
+            platformFilter: 'all',
+            selectedServer: null
         };
 
         // ============================================
@@ -2325,40 +3878,31 @@ Note: "Nova Frame Partnership - [Your Bot/Game Name]"
         function initMatrixRain() {
             const canvas = document.getElementById('matrix-bg');
             const ctx = canvas.getContext('2d');
-
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
-
             const chars = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
             const charArray = chars.split('');
             const fontSize = 14;
             const columns = canvas.width / fontSize;
             const drops = [];
-
             for (let i = 0; i < columns; i++) {
                 drops[i] = Math.random() * -100;
             }
-
             function draw() {
                 ctx.fillStyle = 'rgba(10, 10, 10, 0.05)';
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
-
                 ctx.fillStyle = '#00ff41';
                 ctx.font = fontSize + 'px Share Tech Mono';
-
                 for (let i = 0; i < drops.length; i++) {
                     const char = charArray[Math.floor(Math.random() * charArray.length)];
                     ctx.fillText(char, i * fontSize, drops[i] * fontSize);
-
                     if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
                         drops[i] = 0;
                     }
                     drops[i]++;
                 }
             }
-
             setInterval(draw, 50);
-
             window.addEventListener('resize', () => {
                 canvas.width = window.innerWidth;
                 canvas.height = window.innerHeight;
@@ -2369,18 +3913,13 @@ Note: "Nova Frame Partnership - [Your Bot/Game Name]"
         // NAVIGATION
         // ============================================
         function navigateTo(pageId) {
-            // Update state
             state.currentPage = pageId;
-
-            // Update nav items
             document.querySelectorAll('.nav-item').forEach(item => {
                 item.classList.remove('active');
                 if (item.dataset.page === pageId) {
                     item.classList.add('active');
                 }
             });
-
-            // Update page sections
             document.querySelectorAll('.page-section').forEach(section => {
                 section.classList.remove('active');
             });
@@ -2388,15 +3927,11 @@ Note: "Nova Frame Partnership - [Your Bot/Game Name]"
             if (targetSection) {
                 targetSection.classList.add('active');
             }
-
-            // Update header title
             const navItem = document.querySelector(`[data-page="${pageId}"]`);
             if (navItem) {
                 const title = navItem.textContent.trim();
                 document.getElementById('page-title').textContent = title;
             }
-
-            // Check auth requirements
             const requiresAuth = navItem?.dataset.auth === 'true';
             if (requiresAuth && !state.user) {
                 if (pageId === 'my-bots') {
@@ -2415,42 +3950,35 @@ Note: "Nova Frame Partnership - [Your Bot/Game Name]"
                     document.getElementById('fdr-content').style.display = 'block';
                 }
             }
-
-            // Close mobile menu
             document.getElementById('sidebar').classList.remove('open');
         }
 
-        // Initialize navigation
         document.querySelectorAll('.nav-item').forEach(item => {
             item.addEventListener('click', () => {
                 navigateTo(item.dataset.page);
             });
         });
 
-        // Mobile menu toggle
         document.getElementById('mobile-menu-btn').addEventListener('click', () => {
             document.getElementById('sidebar').classList.toggle('open');
         });
 
         // ============================================
-        // PLATFORM FILTER
+        // PLATFORM FILTER FOR BOTS
         // ============================================
         function filterBots(platform) {
             state.platformFilter = platform;
-            
-            // Update tabs
             document.querySelectorAll('.platform-tab').forEach(tab => {
                 tab.classList.remove('active');
                 if (tab.dataset.platform === platform) {
                     tab.classList.add('active');
                 }
             });
-
             renderBots();
         }
 
         // ============================================
-        // DISCORD AUTH
+        // DISCORD AUTHENTICATION
         // ============================================
         function initiateLogin() {
             const params = new URLSearchParams({
@@ -2465,22 +3993,14 @@ Note: "Nova Frame Partnership - [Your Bot/Game Name]"
         function handleAuthCallback() {
             const urlParams = new URLSearchParams(window.location.search);
             const code = urlParams.get('code');
-            
             if (code) {
-                // In production, exchange code for token via backend
-                // For now, simulate successful login with mock data
-                console.log('Auth code received:', code);
-                
-                // Clear the code from URL
+                console.log('Authorization code received:', code);
                 window.history.replaceState({}, document.title, window.location.pathname);
-                
-                // Simulate user data (in production, this comes from your backend)
                 simulateLogin();
             }
         }
 
         function simulateLogin() {
-            // This simulates a successful login - in production, use real Discord API data
             state.user = {
                 id: '123456789012345678',
                 username: 'User',
@@ -2489,7 +4009,6 @@ Note: "Nova Frame Partnership - [Your Bot/Game Name]"
                 email: 'user@example.com',
                 guilds: []
             };
-            
             updateUserUI();
             loadUserBots();
         }
@@ -2505,31 +4024,28 @@ Note: "Nova Frame Partnership - [Your Bot/Game Name]"
             const userSection = document.getElementById('user-section');
             const loginBtn = document.getElementById('login-btn');
             const logoutBtn = document.getElementById('logout-btn');
-
             if (state.user) {
                 userSection.classList.add('logged-in');
                 loginBtn.style.display = 'none';
                 logoutBtn.style.display = 'flex';
-
                 const avatarUrl = state.user.avatar 
                     ? `https://cdn.discordapp.com/avatars/${state.user.id}/${state.user.avatar}.png`
                     : 'https://cdn.discordapp.com/embed/avatars/0.png';
-                
                 document.getElementById('user-avatar').src = avatarUrl;
                 document.getElementById('user-name').textContent = state.user.username;
                 document.getElementById('user-tag').textContent = `@${state.user.username}#${state.user.discriminator}`;
-
-                // Show authenticated content
-                document.getElementById('bots-login-required').classList.remove('show');
-                document.getElementById('bots-content').style.display = 'block';
-                document.getElementById('fdr-login-required').classList.remove('show');
-                document.getElementById('fdr-content').style.display = 'block';
+                if (state.currentPage === 'my-bots') {
+                    document.getElementById('bots-login-required').classList.remove('show');
+                    document.getElementById('bots-content').style.display = 'block';
+                }
+                if (state.currentPage === 'fdr') {
+                    document.getElementById('fdr-login-required').classList.remove('show');
+                    document.getElementById('fdr-content').style.display = 'block';
+                }
             } else {
                 userSection.classList.remove('logged-in');
                 loginBtn.style.display = 'flex';
                 logoutBtn.style.display = 'none';
-
-                // Hide authenticated content
                 if (state.currentPage === 'my-bots') {
                     document.getElementById('bots-login-required').classList.add('show');
                     document.getElementById('bots-content').style.display = 'none';
@@ -2554,35 +4070,26 @@ Note: "Nova Frame Partnership - [Your Bot/Game Name]"
                 const startTime = Date.now();
                 const response = await fetch(CONFIG.API_URL + '/api/feed');
                 const latency = Date.now() - startTime;
-                
                 if (response.ok) {
                     const data = await response.json();
                     state.isConnected = true;
                     updateConnectionStatus(true, latency);
-                    
-                    // Update stats
-                    if (data.stats) {
-                        updateStats(data.stats);
-                    }
-                    
-                    // Update feed
-                    if (data.recentActivity && Array.isArray(data.recentActivity)) {
-                        updateFeed(data.recentActivity);
-                    }
+                    if (data.stats) updateStats(data.stats);
+                    if (data.recentActivity && Array.isArray(data.recentActivity)) updateFeed(data.recentActivity);
+                    if (data.extendedStats) updateExtendedStats(data.extendedStats);
                 } else {
-                    throw new Error('API error');
+                    throw new Error('API error: ' + response.status);
                 }
             } catch (error) {
                 state.isConnected = false;
                 updateConnectionStatus(false);
-                console.error('API connection error:', error);
+                console.error('Failed to fetch live data:', error);
             }
         }
 
         function updateConnectionStatus(connected, latency = 0) {
             const statusDot = document.getElementById('global-status-dot');
             const statusText = document.getElementById('global-status-text');
-            
             if (connected) {
                 statusDot.classList.remove('offline', 'degraded');
                 statusText.textContent = 'ONLINE';
@@ -2590,16 +4097,13 @@ Note: "Nova Frame Partnership - [Your Bot/Game Name]"
             } else {
                 statusDot.classList.add('offline');
                 statusText.textContent = 'OFFLINE';
+                document.getElementById('api-latency').textContent = '--ms';
             }
         }
 
         function updateStats(stats) {
-            if (stats.totalUsers !== undefined) {
-                document.getElementById('stat-bots').textContent = stats.totalUsers;
-            }
-            if (stats.failedRequests !== undefined) {
-                document.getElementById('stat-threats').textContent = stats.failedRequests;
-            }
+            if (stats.totalUsers !== undefined) document.getElementById('stat-bots').textContent = stats.totalUsers;
+            if (stats.failedRequests !== undefined) document.getElementById('stat-threats').textContent = stats.failedRequests;
             if (stats.apiRequests !== undefined) {
                 document.getElementById('stat-api').textContent = stats.apiRequests;
                 document.getElementById('api-requests-today').textContent = stats.apiRequests;
@@ -2607,13 +4111,73 @@ Note: "Nova Frame Partnership - [Your Bot/Game Name]"
             if (stats.uptime !== undefined) {
                 const uptimeHours = Math.floor(stats.uptime / 3600);
                 document.getElementById('stat-uptime').textContent = uptimeHours + 'h';
-                document.getElementById('api-uptime').textContent = '99.9%';
             }
+            // New dashboard stats
+            if (stats.robloxGames !== undefined) document.getElementById('stat-roblox-games').textContent = stats.robloxGames;
+            if (stats.websites !== undefined) document.getElementById('stat-websites').textContent = stats.websites;
+            if (stats.fivemServers !== undefined) document.getElementById('stat-fivem').textContent = stats.fivemServers;
+            if (stats.dmUsers !== undefined) document.getElementById('stat-dm-users').textContent = stats.dmUsers;
+            document.getElementById('api-uptime').textContent = '99.9%';
+        }
+
+        function updateExtendedStats(stats) {
+            // User & Partner Stats
+            if (stats.totalUsers) document.getElementById('total-users').textContent = stats.totalUsers;
+            if (stats.activeApiKeys) document.getElementById('active-api-keys').textContent = stats.activeApiKeys;
+            if (stats.approvedPartners) document.getElementById('approved-partners').textContent = stats.approvedPartners;
+            if (stats.botTokensIssued) document.getElementById('bot-tokens-issued').textContent = stats.botTokensIssued;
+            
+            // Roblox Stats
+            if (stats.robloxTrials) document.getElementById('roblox-subs-trial').textContent = stats.robloxTrials;
+            if (stats.robloxPaid) document.getElementById('roblox-subs-paid').textContent = stats.robloxPaid;
+            if (stats.robloxTokens) document.getElementById('roblox-tokens').textContent = stats.robloxTokens;
+            if (stats.robloxChecks) document.getElementById('roblox-checks').textContent = stats.robloxChecks;
+            if (stats.robloxGroups) document.getElementById('roblox-groups').textContent = stats.robloxGroups;
+            if (stats.robloxAnticheat) document.getElementById('roblox-anticheat').textContent = stats.robloxAnticheat;
+            if (stats.robloxRevenue) document.getElementById('roblox-revenue').textContent = '$' + stats.robloxRevenue;
+            if (stats.robloxRequests) document.getElementById('roblox-requests').textContent = stats.robloxRequests;
+            
+            // Website Stats
+            if (stats.websiteTrials) document.getElementById('website-subs-trial').textContent = stats.websiteTrials;
+            if (stats.websitePaid) document.getElementById('website-subs-paid').textContent = stats.websitePaid;
+            if (stats.websiteTotalSites) document.getElementById('website-total-sites').textContent = stats.websiteTotalSites;
+            if (stats.websiteDdos) document.getElementById('website-ddos').textContent = stats.websiteDdos;
+            if (stats.websiteSqli) document.getElementById('website-sqli').textContent = stats.websiteSqli;
+            if (stats.websiteXss) document.getElementById('website-xss').textContent = stats.websiteXss;
+            if (stats.websiteBrute) document.getElementById('website-brute').textContent = stats.websiteBrute;
+            if (stats.websiteBlockedIps) document.getElementById('website-blocked-ips').textContent = stats.websiteBlockedIps;
+            if (stats.websiteFirewalls) document.getElementById('website-firewalls').textContent = stats.websiteFirewalls;
+            if (stats.websiteAppeals) document.getElementById('website-appeals').textContent = stats.websiteAppeals;
+            if (stats.websiteRevenue) document.getElementById('website-revenue').textContent = '$' + stats.websiteRevenue;
+            if (stats.websiteRequests) document.getElementById('website-requests').textContent = stats.websiteRequests;
+            
+            // TxAdmin Stats
+            if (stats.txadminWebhooks) document.getElementById('txadmin-webhooks').textContent = stats.txadminWebhooks;
+            if (stats.fivemServers) document.getElementById('fivem-servers').textContent = stats.fivemServers;
+            if (stats.txadminEvents24h) document.getElementById('txadmin-events-24h').textContent = stats.txadminEvents24h;
+            if (stats.serverCrashes) document.getElementById('server-crashes').textContent = stats.serverCrashes;
+            if (stats.txadminEvents) document.getElementById('txadmin-events').textContent = stats.txadminEvents;
+            
+            // Discord Stats
+            if (stats.discordServers) document.getElementById('discord-servers').textContent = stats.discordServers;
+            if (stats.discordCommands) document.getElementById('discord-commands').textContent = stats.discordCommands;
+            if (stats.serverTemplates) document.getElementById('server-templates').textContent = stats.serverTemplates;
+            
+            // IAM Stats
+            if (stats.activeSessions) document.getElementById('active-sessions').textContent = stats.activeSessions;
+            if (stats.credsMonitored) document.getElementById('creds-monitored').textContent = stats.credsMonitored;
+            if (stats.highRisk) document.getElementById('high-risk').textContent = stats.highRisk;
+            if (stats.keyRotations) document.getElementById('key-rotations').textContent = stats.keyRotations;
+            
+            // Performance
+            if (stats.avgResponse) document.getElementById('avg-response').textContent = stats.avgResponse + 'ms';
+            if (stats.peakConnections) document.getElementById('peak-connections').textContent = stats.peakConnections;
+            if (stats.bandwidth24h) document.getElementById('bandwidth-24h').textContent = stats.bandwidth24h + 'GB';
+            if (stats.systemUptimeAll) document.getElementById('system-uptime-all').textContent = stats.systemUptimeAll + '%';
         }
 
         function updateFeed(activities) {
             const feed = document.getElementById('live-feed');
-            
             activities.forEach(log => {
                 const logKey = log.timestamp + log.message;
                 if (!logBuffer.includes(logKey)) {
@@ -2628,40 +4192,86 @@ Note: "Nova Frame Partnership - [Your Bot/Game Name]"
             const feed = document.getElementById('live-feed');
             const line = document.createElement('div');
             line.className = 'feed-line';
-            
             const timestamp = new Date().toTimeString().split(' ')[0];
             const typeClass = type.toLowerCase();
-            
             line.innerHTML = `
                 <span class="feed-timestamp">[${timestamp}]</span>
-                <span class="feed-type ${typeClass}">[${type}]</span>
+                <span class="feed-type ${typeClass}">[${type.toUpperCase()}]</span>
                 <span class="feed-message">${message}</span>
             `;
-            
             feed.appendChild(line);
-            
-            // Keep only last 50 lines
-            while (feed.children.length > 50) {
-                feed.removeChild(feed.firstChild);
-            }
-            
-            // Auto scroll
+            while (feed.children.length > 50) feed.removeChild(feed.firstChild);
             feed.scrollTop = feed.scrollHeight;
         }
 
-        // Update clock
         function updateClock() {
             const time = new Date().toTimeString().split(' ')[0];
             document.getElementById('feed-time').textContent = time;
         }
 
         // ============================================
-        // USER BOTS MANAGEMENT
+        // USER BOT MANAGEMENT
         // ============================================
         function loadUserBots() {
-            // In production, fetch from API based on user's guilds
-            // For now, show empty state or mock data
             state.bots = [];
+            state.servers = [];
+            if (state.user) {
+                // Load user's servers (from Discord guilds they own/admin)
+                state.servers = [
+                    { id: 'srv-001', name: 'My Gaming Community', role: 'owner' },
+                    { id: 'srv-002', name: 'Roleplay Server', role: 'admin' },
+                ];
+                
+                // Load ONLY bots/games that THIS USER owns
+                // These are fetched from the API based on user's Discord ID
+                state.bots = [
+                    // Example data - in reality, fetched from Nova Frame API
+                    // Only shows bots registered to this user
+                ];
+                
+                populateServerSelect();
+            }
+            renderBots();
+        }
+
+        function populateServerSelect() {
+            const serverSelect = document.getElementById('server-select');
+            if (state.servers.length > 0) {
+                serverSelect.innerHTML = '<option value="">-- Select your server --</option>' +
+                    state.servers.map(srv => `<option value="${srv.id}">${srv.name} (${srv.role})</option>`).join('');
+            } else {
+                serverSelect.innerHTML = '<option value="">-- No servers found --</option>';
+            }
+        }
+
+        function onServerSelect(serverId) {
+            state.selectedServer = serverId;
+            if (serverId) {
+                // Fetch bots/games for this server from API
+                // In production, this makes an API call
+                fetchBotsForServer(serverId);
+            } else {
+                state.bots = [];
+                renderBots();
+            }
+        }
+
+        async function fetchBotsForServer(serverId) {
+            try {
+                // API call to get user's bots for selected server
+                const response = await fetch(`${CONFIG.API_URL}/api/user/bots?serverId=${serverId}`, {
+                    headers: { 'Authorization': `Bearer ${state.user?.token || ''}` }
+                });
+                if (response.ok) {
+                    const data = await response.json();
+                    state.bots = data.bots || [];
+                } else {
+                    // Demo data for display
+                    state.bots = [];
+                }
+            } catch (e) {
+                state.bots = [];
+            }
             renderBots();
         }
 
@@ -2671,7 +4281,6 @@ Note: "Nova Frame Partnership - [Your Bot/Game Name]"
             const botCount = document.getElementById('bot-count');
             const fdrSelect = document.getElementById('fdr-bot-select');
             
-            // Filter bots based on platform
             let filteredBots = state.bots;
             if (state.platformFilter !== 'all') {
                 filteredBots = state.bots.filter(bot => bot.platform === state.platformFilter);
@@ -2688,25 +4297,25 @@ Note: "Nova Frame Partnership - [Your Bot/Game Name]"
             } else {
                 emptyState.style.display = 'none';
                 grid.innerHTML = filteredBots.map(bot => `
-                    <div class="bot-card ${bot.status === 'offline' ? 'offline' : ''} ${bot.platform === 'roblox' ? 'roblox' : ''}">
+                    <div class="bot-card ${bot.status === 'offline' ? 'offline' : ''} ${bot.platform === 'roblox' ? 'roblox' : ''} ${bot.platform === 'website' ? 'website' : ''} ${bot.platform === 'fivem' ? 'txadmin' : ''}">
                         <div class="bot-header">
-                            <div class="bot-avatar ${bot.platform === 'roblox' ? 'roblox' : ''}">
-                                <i class="fas ${bot.platform === 'roblox' ? 'fa-cube' : 'fa-robot'}"></i>
+                            <div class="bot-avatar ${bot.platform}">
+                                <i class="fas ${getPlatformIcon(bot.platform)}"></i>
                             </div>
                             <div class="bot-info">
                                 <h3>${bot.name}</h3>
                                 <div class="bot-id">ID: ${bot.id}</div>
-                                <div class="bot-platform-badge ${bot.platform}">${bot.platform === 'roblox' ? 'Roblox' : 'Discord'}</div>
+                                <div class="bot-platform-badge ${bot.platform}">${getPlatformLabel(bot.platform)}</div>
                             </div>
                         </div>
                         <div class="bot-stats">
                             <div class="bot-stat">
-                                <div class="bot-stat-value">${bot.servers || 0}</div>
-                                <div class="bot-stat-label">${bot.platform === 'roblox' ? 'Players' : 'Servers'}</div>
+                                <div class="bot-stat-value">${bot.servers || bot.sites || bot.players || 0}</div>
+                                <div class="bot-stat-label">${getPlatformMetricLabel(bot.platform)}</div>
                             </div>
                             <div class="bot-stat">
-                                <div class="bot-stat-value">${bot.users || 0}</div>
-                                <div class="bot-stat-label">Users</div>
+                                <div class="bot-stat-value">${bot.users || bot.requests || 0}</div>
+                                <div class="bot-stat-label">${bot.platform === 'website' ? 'Requests' : 'Users'}</div>
                             </div>
                             <div class="bot-stat">
                                 <div class="bot-stat-value">${bot.uptime || '0%'}</div>
@@ -2715,19 +4324,52 @@ Note: "Nova Frame Partnership - [Your Bot/Game Name]"
                         </div>
                         <div class="bot-actions">
                             <button class="bot-btn primary" onclick="configureFDR('${bot.id}')">
-                                <i class="fas fa-cog"></i> FDR Settings
+                                <i class="fas fa-cog"></i> Settings
                             </button>
-                            <button class="bot-btn secondary">
+                            <button class="bot-btn secondary" onclick="viewMetrics('${bot.id}')">
                                 <i class="fas fa-chart-line"></i> Metrics
                             </button>
                         </div>
                     </div>
                 `).join('');
                 
-                // Update FDR select
-                fdrSelect.innerHTML = '<option value="">-- Select a bot --</option>' +
-                    state.bots.map(bot => `<option value="${bot.id}">${bot.name} (${bot.platform})</option>`).join('');
+                fdrSelect.innerHTML = '<option value="">-- Select a bot/game --</option>' +
+                    state.bots.map(bot => `<option value="${bot.id}">${bot.name} (${getPlatformLabel(bot.platform)})</option>`).join('');
             }
+        }
+
+        function getPlatformIcon(platform) {
+            const icons = {
+                'discord': 'fa-robot',
+                'roblox': 'fa-cube',
+                'website': 'fa-globe',
+                'fivem': 'fa-car'
+            };
+            return icons[platform] || 'fa-server';
+        }
+
+        function getPlatformLabel(platform) {
+            const labels = {
+                'discord': 'Discord Bot',
+                'roblox': 'Roblox Game',
+                'website': 'Website',
+                'fivem': 'FiveM Server'
+            };
+            return labels[platform] || platform;
+        }
+
+        function getPlatformMetricLabel(platform) {
+            const labels = {
+                'discord': 'Servers',
+                'roblox': 'Players',
+                'website': 'Sites',
+                'fivem': 'Players'
+            };
+            return labels[platform] || 'Count';
+        }
+
+        function viewMetrics(botId) {
+            alert('Metrics coming soon! DM the Nova Frame bot for detailed stats.');
         }
 
         function configureFDR(botId) {
@@ -2736,7 +4378,6 @@ Note: "Nova Frame Partnership - [Your Bot/Game Name]"
             document.getElementById('fdr-settings').style.display = 'block';
         }
 
-        // FDR bot selection
         document.getElementById('fdr-bot-select').addEventListener('change', (e) => {
             const settings = document.getElementById('fdr-settings');
             settings.style.display = e.target.value ? 'block' : 'none';
@@ -2748,10 +4389,7 @@ Note: "Nova Frame Partnership - [Your Bot/Game Name]"
             const channelNotify = document.getElementById('fdr-channel-notify').checked;
             const mode = document.getElementById('fdr-mode').value;
             const grace = document.getElementById('fdr-grace').value;
-            
             console.log('Saving FDR settings:', { botId, dmNotify, channelNotify, mode, grace });
-            
-            // In production, send to API
             alert('FDR settings saved successfully!');
         }
 
@@ -2760,34 +4398,30 @@ Note: "Nova Frame Partnership - [Your Bot/Game Name]"
         // ============================================
         document.getElementById('partnership-form').addEventListener('submit', async (e) => {
             e.preventDefault();
-            
             const formData = new FormData(e.target);
             const data = {
                 botName: formData.get('botName'),
                 platform: formData.get('platform'),
                 botId: formData.get('botId'),
                 email: formData.get('email'),
-                description: formData.get('description'),
-                reason: formData.get('reason')
+                description: formData.get('description')
             };
-            
             try {
                 const response = await fetch(CONFIG.API_URL + '/api/partner/apply', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(data)
                 });
-                
                 if (response.ok) {
                     const result = await response.json();
-                    alert(`✅ Application Submitted!\n\nYou'll receive approval status within 24-48 hours.\n\nIf approved, send $50 to:\n${result.paypal || 'kurraschgamingmerchstore@gmail.com'}\n\nNote: "Nova Frame Partnership - ${data.botName}"`);
+                    alert(`✅ Application Submitted!\n\nYou'll receive approval within 24-48 hours.\n\nPayment:\n- Discord Bot: $50 one-time\n- Roblox: $20/month (30-day free trial)\n- Website: $5-25/month\n\nPayPal: kurraschgamingmerchstore@gmail.com`);
                     e.target.reset();
                     navigateTo('dashboard');
                 } else {
                     alert('❌ Submission failed. Please try again.');
                 }
             } catch (error) {
-                alert(`⚠️ Could not connect to Nova Frame API.\n\nPlease email your application to:\nkurraschgamingmerchstore@gmail.com`);
+                alert(`⚠️ Could not connect to API.\n\nPlease email: kurraschgamingmerchstore@gmail.com`);
             }
         });
 
@@ -2795,34 +4429,21 @@ Note: "Nova Frame Partnership - [Your Bot/Game Name]"
         // INITIALIZATION
         // ============================================
         function init() {
-            // Initialize Matrix rain
             initMatrixRain();
-            
-            // Check for auth callback
             handleAuthCallback();
-            
-            // Start clock
             setInterval(updateClock, 1000);
             updateClock();
-            
-            // Initial data fetch
             fetchLiveData();
-            
-            // Poll for updates
             setInterval(fetchLiveData, 3000);
-            
-            // Add initial feed message
             setTimeout(() => {
                 if (!state.isConnected) {
                     addFeedLine('SYSTEM', 'Attempting connection to Nova Frame API...');
                 }
             }, 2000);
-            
             console.log('%c NOVA FRAME ', 'background: #00ff41; color: #0a0a0a; font-size: 16px; font-weight: bold; padding: 10px;');
-            console.log('%c Security Infrastructure Platform ', 'color: #00ff41;');
+            console.log('%c A Game Killer Studios Product ', 'color: #00ff41;');
         }
 
-        // Start the application
         document.addEventListener('DOMContentLoaded', init);
     </script>
 </body>
